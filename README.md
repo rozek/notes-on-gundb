@@ -6,4 +6,4 @@ a (growing) collection of notes on GunDB
 
 While GunDB might be brilliant in some aspects, the docs are a complete nightmare (incomplete, wrong, spread over many separate documents). This repository therefore contains a collection of the author's notes on GunDB as he starts learning and evaluating it.
 
-First of all: **do not use [https://gun.eco/docs](https://gun.eco/docs) - use the [GunDB wiki](https://github.com/amark/gun/wiki) instead, it's much better**
+> **First of all: do not use [https://gun.eco/docs](https://gun.eco/docs) - use the [GunDB wiki](https://github.com/amark/gun/wiki) instead, it's much better**
