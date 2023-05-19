@@ -8,7 +8,7 @@ While GunDB might be brilliant in some aspects, the docs are a complete nightmar
 
 In the end, these notes will hopefully be less chaotic than the official docs or the GunDB wiki.
 
-> feel free to open an issue if you think that I am wrong with my descriptions
+> feel free to open an issue if you find errors in my descriptions
 
 ## GunDB Documentation ##
 
