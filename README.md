@@ -67,9 +67,11 @@ By design, nodes and their contents cannot easily be deleted - there could alway
 
 ### Scalability ###
 
-By design, graph databases may grow as much as desired: an unlimited number of peers may work with an unlimited number of users and an unlimited number of nodes which itself may contain an unlimited number of properties (like the root node). Because the nesting of nodes is also unlimited, their souls could become longer and longer without end - although this situation should better be avoided as there is no optimization mechanism for this case (unnecessary nodes and properties may easily just be ignored by any peer, but a node's soul can not)
+By design, graph databases may grow as much as desired: an unlimited number of peers may work with an unlimited number of users and an unlimited number of nodes which itself may contain an unlimited number of properties (like the root node often does). Because the nesting of nodes is also unlimited, their souls could become longer and longer without end - although this situation should better be avoided as there is no optimization mechanism for this case (unnecessary nodes and properties may easily just be ignored by any peer, but a node's soul can not)
 
 ### Privacy ###
+
+
 
 ### Persistence ###
 
