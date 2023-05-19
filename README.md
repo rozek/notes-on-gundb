@@ -39,7 +39,7 @@ It should be noted that _everybody may define new users_ for GunDB just by creat
 
 The participants of a graph database are called **peers**. At the moment, GunDB provides JavaScript _clients_ for such peers, these may be used by (human-controlled) applications, relays or other automated systems.
 
-Communication takes place between these peers and do not require any central servers for that purpose (GunDB is a **peer-to-peer** database).
+Data transfer takes place between these peers and do not require any central servers for that purpose (GunDB is a **peer-to-peer** database). However, in order to establish such a data transfer, the other peers have to be found first - that's what **relay peers** are good for: **business peers** contact one or multiple relay peers in order to be informed about the location of any required nodes and then communicate with those locations directly. This takes load off individual relays and also reduces the probability of database failure by simply moving to another relay should one of them shut down.
 
 
 (more to come)
