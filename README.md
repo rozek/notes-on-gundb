@@ -7,13 +7,13 @@ a (growing) collection of notes on GunDB
 
 [GunDB](https://github.com/amark/gun) is a decentralized (peer-to-peer) distributed [graph database](https://en.wikipedia.org/wiki/Graph_database) with support for multiple users, access control and persistence. It runs in the browser or on [Node.js](https://nodejs.org/en), works fine when offline and synchronizes with other peers using a "last-write-wins" strategy when online.
 
-While GunDB might be brilliant in many aspects, the docs are a complete nightmare (hard to read, chaotic, incomplete, wrong). This repository therefore contains a collection of the author's notes on GunDB written while he tries to learn and use it.
+While GunDB itself may be brilliant in many aspects, the docs are a complete nightmare (hard to read, chaotic, incomplete, wrong). This repository therefore contains a collection of the author's notes on GunDB written while he tries to learn and use it.
 
 In the end, these notes will hopefully be less chaotic than the official docs or the GunDB wiki.
 
 > feel free to [open an issue](https://github.com/rozek/notes-on-gundb/issues) if you find errors in my descriptions
 
-## GunDB Documentation ##
+## GunDB Documentation and Chat ##
 
 **Do not use `https://gun.eco/docs` - use the [GunDB wiki](https://github.com/amark/gun/wiki) instead, it's much better**. The descriptions in this collection will therefore refer to the wiki rather than to the "official" docs.
 
@@ -21,9 +21,26 @@ If you have questions and don't find any answers in the docs, the wiki or these 
 
 ## Basic Concepts and Terms ##
 
-### Nodes and Links ###
+GunDB is a decentralized (peer-to-peer) distributed graph database.
 
-The individual items stored in GunDB are called "nodes" and may contain plain data and/or "links" to other nodes.
+The entries in this database are called **nodes**. Every node has a unique id (called its **soul**) and may contain an arbitrary number of **properties**. Properties may contain **values** (either `null` or a boolean, number or string primitive) or **links**. Links are pointers to nodes (identified by their soul) and may either point to other nodes or (directly or indirectly) to themselves: _circular references are deliberately permitted_.
+
+At the beginning, the only known node is the **root node**. By (recursively) following the links in this node (or directly navigating to a given soul) other nodes can be visited and their properties loaded. The set of all nodes is sometimes also called the **universe** of a graph database.
+
+The nodes directly "above" the root node play a special role, within these notes they are therefore called **trunk nodes** and all remaining nodes **branch nodes**.
+
+In GunDB, **users** are represented by _cryptographic key pairs_. The _public key_ of such a pair is used to identify a user within the GunDB universe and to provide a trunc node for her/him. The _private key_ of that pair is required to be allowed to write into the trunc node and above.
+
+As indicated by their name, _private_ keys should be kept safe and not shared: when lost, the related user space can no longer be written to - when leaked, everybody with that key may modify the information in the related user space. On the other side, _public_ keys may deliberately be shared - they allow others to navigate to the related user space, verify that user's signatures or encrypt messages for that user.
+
+Since cryptographic keys look like long random numbers, users may also be referenced by an **alias**. When created, the trunc node for such an alias contain the public keys for that user and can be used to navigate to the actual user space.
+
+
+
+
+
+
+
 
 ### Properties and their values ###
 
