@@ -33,9 +33,14 @@ In GunDB, **users** are represented by _cryptographic key pairs_. The <u>public<
 
 As indicated by their name, _private_ keys should be kept safe and not shared: when lost, the related user space can no longer be written to - when leaked, everybody with that key may modify the information in the related user space. On the other side, _public_ keys may deliberately be shared - they allow others to navigate to the related user space, verify a user's signatures or encrypt messages for that user.
 
-Since cryptographic keys look like long random numbers, users may also be referenced by an **alias**. When created, the trunc node for such an alias contain the public key for that user and can be used to navigate to the actual user space.
+Since cryptographic keys look like long random numbers, users may also be referenced by a (human readable) **alias**. When created, the trunc node for such an alias contain the public key for that user and can be used to navigate to the actual user space.
 
-It should be noted that _everybody may create new users_ for GunDB just by creating a cryptographic key pair (and the corresponding trunc node) or by creating a new alias. Furthermore, "users" do not necessarily have to represent human beings - they could also be used to create user _groups_, data spaces for applications, chat rooms and much more. 
+It should be noted that _everybody may define new users_ for GunDB just by creating a cryptographic key pair (and the corresponding trunc node) or by creating a new alias. Furthermore, "users" do not necessarily have to represent human beings - they could also represent user _groups_, data spaces for applications, chat rooms and much more. 
+
+The participants of a graph database are called **peers**. At the moment, GunDB provides JavaScript _clients_ for such peers, these may be used by (human-controlled) applications, relays or other automated systems
+
+
+(more to come)
 
 
 
