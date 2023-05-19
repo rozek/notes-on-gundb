@@ -57,13 +57,23 @@ Nevertheless, a network outage may always disconnect some peers from the rest of
 
 ### Eventual Consistence ###
 
+Principally, the clients of a graph database never know if the data they received so far is complete and up-to-date - there could always remain one last peer which stores the final bit of information to make the image complete, but which has unfortunately been disconnected from the rest of the network for a while. By design, graph databases can only guarantee that their contents become **eventually consistent**, i.e., that they synchronize as soon as disconnected peers get connected again.
+
+As a consequence, the clients of a graph database should always listen to (and react on) incoming changes of the nodes they have requested before. Graph databases are **dynamic databases**.
+
 ### Data Removal ###
 
+By design, nodes and their contents cannot easily be deleted - there could always be another node that did not receive the deletion report but still holds a copy of the outdated node and sends it back to the database again. Instead, old nodes and properties have to be **nulled out** in order to be marked as **garbage**. This operation creates a **tombstone** which is kept in the database and eventually overwrites the original data in every peer. If it becomes necessary to actually get rid of no longer wanted nodes, some kind of **distributed garbage collection** has to be implemented on top of the graph database - GunDB does not (yet) provide such a DGC.
+
 ### Scalability ###
+
+By design, graph databases may grow as much as desired: an unlimited number of peers may work with an unlimited number of users and an unlimited number of nodes which itself may contain an unlimited number of properties (like the root node). Because the nesting of nodes is also unlimited, their souls could become longer and longer without end - although this situation should better be avoided as there is no optimization mechanism for this case (unnecessary nodes and properties may easily just be ignored by any peer, but a node's soul can not)
 
 ### Privacy ###
 
 ### Persistence ###
+
+Nodes requested during runtime are persisted locally in every peer (browsers persist in localStorage or IndexedDB as far as their quota permits, Node.js clients persist on the file system) - but more reliable backups may also be made with the help of automated peers that try to fetch every node, e.g., in a given user space.
 
 ### Usage ###
 
