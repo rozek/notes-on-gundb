@@ -65,6 +65,19 @@ Nevertheless, a network outage may always disconnect some peers from the rest of
 
 ### Persistence ###
 
+### Usage ###
+
+GunDB uses **callbacks** not unlike **event handlers** to inform an application about incoming changes on nodes that are under observation.
+
+It goes very well with **reactive programming** frameworks based on **observables** (sometimes called **signals**) which, when changed, automatically trigger updates of a user interface at the required places (or invoke any other dependent function)
+
+### Data Modelling ###
+
+
+### Data Mapping ###
+
+Business data rarely fits directly to a GunDB node as the contents of such a node are limited to `null`, boolean, number or string values and links. GunDB neither supports arrays nor nested objects - even if these are used to hold **tuples** and **structures** whose elements are not meant to be changed individually but only as a whole. Furthermore, business objects are usually implemented as **instances** of **classes** rather than **plain objects**. As a consequence, the use of GunDB normally requires the implementation of an interface layer which maps nodes to business data and vice-versa.
+
 (more to come)
 
 
