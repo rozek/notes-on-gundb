@@ -26,7 +26,7 @@ GunDB nodes look like "associative arrays" (or "hash tables" or simply plain Jav
 
 * `null`,
 * a primitive `boolean`, `number` or `string` value or
-* a "link", i.e., an object of the form `{'#':'...'}` where the ellipsis stands for the "soul" of a link (see section [Souls](https://github.com/rozek/notes-on-gundb/blob/main/README.md#souls))
+* a "link", i.e., an object of the form `{'#':'...'}` where the ellipsis stands for the "soul" of a node (see section [Souls](https://github.com/rozek/notes-on-gundb/blob/main/README.md#souls))
 
 Links do not necessarily have to refer to _other_ nodes - it is well permitted to directly or indirectly refer to the same node again ("circular reference")
 
