@@ -41,6 +41,10 @@ The participants of a graph database are called **peers**. At the moment, GunDB 
 
 Data transfer takes place between these peers and do not require any central servers for that purpose (GunDB is a **peer-to-peer** database). However, in order to establish such a data transfer, the other peers have to be found first - that's what **relay peers** are good for: **business peers** contact one or multiple relay peers in order to be informed about the location of any required nodes and then communicate with those locations directly. This takes load off individual relays and also reduces the probability of database failure by simply moving to another relay should one of them shut down.
 
+Similarly, peers that have expressed interest in certain nodes obviously (temporarily or permanently) hold a copy of these nodes. This knowledge may be exploited by other peers by requesting such nodes from any of those peers that are known to hold copies - further reducing both the load on individual peers and the probability of an overall failure.
+
+Nevertheless, a network outage may always disconnect peers from the rest of a GunDB database.
+
 
 (more to come)
 
