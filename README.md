@@ -19,7 +19,7 @@ Every node has a unique global id called "soul". Nodes that belong to a user hav
 
 ### Paths and Keys ###
 
-Souls consist of a (potentially empty) "path" followed by a slash `/` and a "key" (e.g., "outer/inner/object") - similar to the path names of files in a file system.
+Souls consist of a (potentially empty) "path" followed by a slash (`/`) and a "key" (e.g., "outer/inner/object") - similar to the path names of files in a file system.
 
 Often, the various subpaths (e.g., "outer", "outer/inner") identify nodes which link to other nodes whose ids start with the same path (e.g., "outer/...", "outer/inner/...") forming a "containment tree" with "outer nodes" (those with shorter ids) "containing" "inner nodes" (those with longer ids).
 
