@@ -41,7 +41,7 @@ Since cryptographic keys look like long random numbers, users may also be refere
 
 It should be noted that _everybody may define new users_ for GunDB just by creating a cryptographic key pair (and the corresponding trunc node) or by creating a new alias. Furthermore, "users" do not necessarily have to represent human beings - they could also represent user _groups_, data spaces for applications, chat rooms and much more. 
 
-### Connectivity ###
+### Topology ###
 
 The participants of a graph database are called **peers**. At the moment, GunDB provides JavaScript _clients_ for such peers, these may be used by (human-controlled) applications, relays or other automated systems.
 
