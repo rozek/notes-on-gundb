@@ -25,6 +25,8 @@ Often, the various subpaths (e.g., "outer", "outer/inner") identify nodes which 
 
 But, from a technical viewpoint, ids are just plain strings and there is no need for "outer" nodes to exist when "inner" nodes do (e.g., node "outer" may be missing even when "outer/inner" exists). As a consequence, there is also no need for "outer" nodes to link to "inner" nodes for them to exist.
 
+Additionally, it is perfectly possible for the "key" part of a "soul" to contain a slash as  well - the only requirement is a the non-empty "path" in front of a "key" is followed by a slash in order to build a complete "soul". 
+
 ### Contexts ###
 
 GunDB uses "contexts" (other people might prefer the term "handles") to refer to a node with a given soul
