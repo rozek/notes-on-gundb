@@ -9,6 +9,17 @@ While GunDB might be brilliant in some aspects, the docs are a complete nightmar
 > **First of all: do not use `https://gun.eco/docs` - use the [GunDB wiki](https://github.com/amark/gun/wiki) instead, it's much better**
 
 
+## Basic Concepts and Terms ##
+
+### Soul ###
+
+Every node has a unique global id called "soul". Nodes that belong to a user have souls looking like "~34Pi...neEo/sharedData/object" (where the ellipsis stands for additional characters), others "sharedTest/sharedData/object"
+
+### Contexts ###
+
+GunDB uses "contexts" (other people might prefer the term "handles") to refer to a node with a given soul
+
+
 
 
 
