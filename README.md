@@ -23,20 +23,19 @@ If you have questions and don't find any answers in the docs, the wiki or these 
 
 GunDB is a decentralized (peer-to-peer) distributed graph database.
 
-The entries in this database are called **nodes**. Every node has a unique id (called its **soul**) and may contain an arbitrary number of **properties**. Properties may contain **values** (either `null` or a boolean, number or string primitive) or **links**. Links are pointers to nodes (identified by their soul) and may either point to other nodes or (directly or indirectly) to themselves: _circular references are deliberately permitted_.
+The entries in this database are called **nodes**. Every node has a globally unique **id** (called its **soul**) and may contain an arbitrary number of **properties**. Properties may contain **values** (either `null` or a boolean, number or string) or **links**. Links are pointers to nodes (identified by their soul) and may either point to _other_ nodes or (directly or indirectly) to themselves: <u>circular references are deliberately permitted!</u>
 
 At the beginning, the only known node is the **root node**. By (recursively) following the links in this node (or directly navigating to a given soul) other nodes can be visited and their properties loaded. The set of all nodes is sometimes also called the **universe** of a graph database.
 
-The nodes directly "above" the root node play a special role, within these notes they are therefore called **trunk nodes** and all remaining nodes **branch nodes**.
+Nodes directly "above" the root node play a special role, within these notes they are therefore called **trunk nodes** and all remaining nodes **branch nodes**.
 
-In GunDB, **users** are represented by _cryptographic key pairs_. The _public key_ of such a pair is used to identify a user within the GunDB universe and to provide a trunc node for her/him. The _private key_ of that pair is required to be allowed to write into the trunc node and above.
+In GunDB, **users** are represented by _cryptographic key pairs_. The <u>public</u> key of such a pair is used to identify a user within the GunDB universe and to provide a trunc node for her/him. The <u>private</u> key of that pair is required in order to get the permission to write into the trunc node and above.
 
-As indicated by their name, _private_ keys should be kept safe and not shared: when lost, the related user space can no longer be written to - when leaked, everybody with that key may modify the information in the related user space. On the other side, _public_ keys may deliberately be shared - they allow others to navigate to the related user space, verify that user's signatures or encrypt messages for that user.
+As indicated by their name, _private_ keys should be kept safe and not shared: when lost, the related user space can no longer be written to - when leaked, everybody with that key may modify the information in the related user space. On the other side, _public_ keys may deliberately be shared - they allow others to navigate to the related user space, verify a user's signatures or encrypt messages for that user.
 
-Since cryptographic keys look like long random numbers, users may also be referenced by an **alias**. When created, the trunc node for such an alias contain the public keys for that user and can be used to navigate to the actual user space.
+Since cryptographic keys look like long random numbers, users may also be referenced by an **alias**. When created, the trunc node for such an alias contain the public key for that user and can be used to navigate to the actual user space.
 
-
-
+It should be noted that _everybody may create new users_ for GunDB just by creating a cryptographic key pair (and the corresponding trunc node) or by creating a new alias. Furthermore, "users" do not necessarily have to represent human beings - they could also be used to create user _groups_, data spaces for applications, chat rooms and much more. 
 
 
 
