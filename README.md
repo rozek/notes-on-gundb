@@ -11,15 +11,19 @@ While GunDB might be brilliant in some aspects, the docs are a complete nightmar
 
 ## Basic Concepts and Terms ##
 
-### Soul ###
+### Nodes and Links ###
 
-Every node has a unique global id called "soul". Nodes that belong to a user have souls looking like "~34Pi...neEo/sharedData/object" (where the ellipsis stands for additional characters, see section "User Handling"), others "sharedTest/sharedData/object". 
+### Souls ###
 
-### Path and Key ###
+Every node has a unique global id called "soul". Nodes that belong to a user have souls looking like "~34Pi...neEo/sharedData/object" (where the ellipsis stands for additional characters, see section "User Handling"), others "outer/inner/object". 
 
-Souls consist of a (potentially empty) "path" followed by a slash `/` and a "key" (e.g., "sharedTest/sharedData/object") - similar to the path names of files in a file system.
+### Paths and Keys ###
 
-Often, the various subpaths (e.g., "sharedTest", "sharedTest/sharedData") identify nodes which link to other nodes whose ids start with the same path (e.g., "sharedTest/...", "sharedTest/sharedData/...") forming a "containment tree" with "outer nodes" (those with shorter ids) "containing" "inner nodes" (those with longer ids) - but, from a technical viewpoint, ids are just plain strings.
+Souls consist of a (potentially empty) "path" followed by a slash `/` and a "key" (e.g., "outer/inner/object") - similar to the path names of files in a file system.
+
+Often, the various subpaths (e.g., "outer", "outer/inner") identify nodes which link to other nodes whose ids start with the same path (e.g., "outer/...", "outer/inner/...") forming a "containment tree" with "outer nodes" (those with shorter ids) "containing" "inner nodes" (those with longer ids).
+
+But, from a technical viewpoint, ids are just plain strings and there is no need for "outer" nodes to exist when "inner" nodes do (e.g., node "outer" may be missing even when "outer/inner" exists). As a consequence, there is also no need for "outer" nodes to link to "inner" nodes for them to exist.
 
 ### Contexts ###
 
