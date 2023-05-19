@@ -10,7 +10,7 @@ While GunDB might be brilliant in some aspects, the docs are a complete nightmar
 
 ## GunDB Documentation ##
 
-**Do not use `https://gun.eco/docs` - use the [GunDB wiki](https://github.com/amark/gun/wiki) instead, it's much better**
+**Do not use `https://gun.eco/docs` - use the [GunDB wiki](https://github.com/amark/gun/wiki) instead, it's much better** The descriptions in this collection will therefore refer to the wiki rather than to the "official" docs.
 
 ## Basic Concepts and Terms ##
 
