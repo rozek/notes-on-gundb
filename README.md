@@ -33,6 +33,24 @@ While GunDB might be brilliant in some aspects, the docs are a complete nightmar
 ```
 
 
+
+## Utility Functions ###
+
+Here are the various utility functions which were used in the code snippets shown above:
+
+### waitFor ###
+
+```
+/**** wait a given number of milliseconds ****/
+
+  async function waitFor (Duration) {
+    return new Promise((resolve,reject) => {
+      setTimeout(resolve,Duration)
+    })
+  }
+```
+
+
 ## License ##
 
 [MIT License](LICENSE.md)
