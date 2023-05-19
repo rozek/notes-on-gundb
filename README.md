@@ -71,12 +71,13 @@ GunDB uses **callbacks** not unlike **event handlers** to inform an application 
 
 It goes very well with **reactive programming** frameworks based on **observables** (sometimes called **signals**) which, when changed, automatically trigger updates of a user interface at the required places (or invoke any other dependent function)
 
-### Data Modelling ###
-
-
 ### Data Mapping ###
 
-Business data rarely fits directly to a GunDB node as the contents of such a node are limited to `null`, boolean, number or string values and links. GunDB neither supports arrays nor nested objects - even if these are used to hold **tuples** and **structures** whose elements are not meant to be changed individually but only as a whole. Furthermore, business objects are usually implemented as **instances** of **classes** rather than **plain objects**. As a consequence, the use of GunDB normally requires the implementation of an interface layer which maps nodes to business data and vice-versa.
+Business data rarely fits directly to a GunDB node as the contents of such a node are limited to `null`, boolean, number or string values and links. GunDB neither supports arrays nor nested objects - even if these are used to hold **tuples** and **structures** whose elements are not meant to be changed individually but only as a whole. Furthermore, business objects are mostly implemented as **instances** of **classes** rather than **plain objects**. As a consequence, the use of GunDB normally requires the implementation of an **interface layer** which maps nodes to business data and vice-versa.
+
+### Data Modelling ###
+
+A graph database contains nodes and links. Each node is individually addressable and has to be fetched separately - this should be taken into account when designing the mapping between business data and GunDB nodes. Items of business objects which always belong to these objects should probably be better kept within "their" object (unless size constraints enforce a separate node). On the other hand, items used in multiple places of a business application can naturally be stored in an own node.
 
 (more to come)
 
