@@ -8,6 +8,30 @@ While GunDB might be brilliant in some aspects, the docs are a complete nightmar
 
 > **First of all: do not use `https://gun.eco/docs` - use the [GunDB wiki](https://github.com/amark/gun/wiki) instead, it's much better**
 
+
+
+
+
+
+## User Handling ##
+
+"Users" in GunDB are actually represented by cryptographic key pairs, a concept around "aliases" allows "humans" to create and authenticate users by name.
+
+
+### Logging out ###
+
+[user.leave](https://github.com/amark/gun/wiki/User#userleave) logs a user out - here is how you can wait for success:
+
+```
+  await (async () => {
+    Gun.user().leave()
+    while (Gun.user()._.sea != null) {
+      await waitFor(1)
+    }
+  })()
+```
+
+
 ## License ##
 
 [MIT License](LICENSE.md)
