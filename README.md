@@ -13,7 +13,13 @@ While GunDB might be brilliant in some aspects, the docs are a complete nightmar
 
 ### Soul ###
 
-Every node has a unique global id called "soul". Nodes that belong to a user have souls looking like "~34Pi...neEo/sharedData/object" (where the ellipsis stands for additional characters), others "sharedTest/sharedData/object"
+Every node has a unique global id called "soul". Nodes that belong to a user have souls looking like "~34Pi...neEo/sharedData/object" (where the ellipsis stands for additional characters, see section "User Handling"), others "sharedTest/sharedData/object". 
+
+### Path and Key ###
+
+Souls consist of a (potentially empty) "path" followed by a slash `/` and a "key" (e.g., "sharedTest/sharedData/object") - similar to the path names of files in a file system.
+
+Often, the various subpaths (e.g., "sharedTest", "sharedTest/sharedData") identify nodes which link to other nodes whose ids start with the same path (e.g., "sharedTest/...", "sharedTest/sharedData/...") forming a "containment tree" with "outer nodes" (those with shorter ids) "containing" "inner nodes" (those with longer ids) - but, from a technical viewpoint, ids are just plain strings.
 
 ### Contexts ###
 
