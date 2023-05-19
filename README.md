@@ -43,7 +43,7 @@ Data transfer takes place between these peers and do not require any central ser
 
 Similarly, peers that have expressed interest in certain nodes obviously (temporarily or permanently) hold a copy of these nodes. This knowledge may be exploited by other peers by requesting such nodes from any of those peers that are known to hold copies - further reducing both the load on individual peers and the probability of an overall failure.
 
-Nevertheless, a network outage may always disconnect peers from the rest of a GunDB database.
+Nevertheless, a network outage may always disconnect peers from the rest of a GunDB database - this is called **network partitioning**. While the GunDB database in itself remains usable, remote data may not be requested, remote changes may not be observed and local changes not reported to other peers - the so called **split brain** problem. However, as soon as the network becomes operational again, all changes may be delivered and the nodes held by individual peers synchronized with the rest of the database. As long as these changes do not affect the same properties of the same nodes, synchronization remains simple - in case of a **conflict**, GunDB uses some **metadata** for the affected properties stored along in the same node to implement a **last-write-wins** strategy, where later changes overwrite former ones.
 
 
 (more to come)
