@@ -15,7 +15,7 @@ While GunDB might be brilliant in some aspects, the docs are a complete nightmar
 
 ### Souls ###
 
-Every node has a unique global id called "soul". Nodes that belong to a user have souls looking like "~34Pi...neEo/sharedData/object" (where the ellipsis stands for additional characters, see section "User Handling"), others "outer/inner/object". 
+Every node has a unique global id called "soul". Nodes that belong to a user have souls looking like "~34Pi...neEo/sharedData/object" (where the ellipsis stands for a lot of additional characters, see section "User Handling"), others "outer/inner/object". 
 
 ### Paths and Keys ###
 
