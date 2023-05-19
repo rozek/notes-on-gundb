@@ -16,6 +16,16 @@ While GunDB might be brilliant in some aspects, the docs are a complete nightmar
 
 ### Nodes and Links ###
 
+The individual items stored in GunDB are called "nodes" and may contain plain data and/or "links" to other nodes.
+
+### Properties and their values ###
+
+GunDB nodes look like "associative arrays" (or "hash tables" or simply plain JavaScript objects) and may contain "properties" with "values". The values of a property may be
+
+* `null`,
+* a primitive `boolean`, `number` or `string` value or
+* an object of the form `{'#':'...'}` where the ellipsis stands for the "soul" of a link (see section Souls)
+
 ### Souls ###
 
 Every node has a unique global id called "soul". Nodes that belong to a user have souls looking like "~34Pi...neEo/sharedData/object" (where the ellipsis stands for a lot of additional characters, see section [User Handling](https://github.com/rozek/notes-on-gundb/blob/main/README.md#user-handling)), others "outer/inner/object". 
