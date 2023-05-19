@@ -15,7 +15,8 @@ While GunDB might be brilliant in some aspects, the docs are a complete nightmar
 
 ## User Handling ##
 
-"Users" in GunDB are actually represented by cryptographic key pairs, a concept around "aliases" allows "humans" to create and authenticate users by name.
+"[Users](https://github.com/amark/gun/wiki/User)" in GunDB are actually represented by cryptographic key pairs, "aliases" allow users to be created, looked-up and authenticated by name. Nodes with keys of the form `'~' + publicKey` on the outermost level build the foundation of "user spaces". Trying to write into the space of a given user requires a GunDB client to be authenticated as that user (which requires the proper _private_ key for the public one that builds the user space)
+
 
 
 ### Logging out ###
