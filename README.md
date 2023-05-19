@@ -55,6 +55,15 @@ While connected, any changes made by any peer are immediately reported to any ot
 
 Nevertheless, a network outage may always disconnect some peers from the rest of a GunDB database - this is called **network partitioning**. While GunDB in itself remains usable, remote data may not be requested, remote changes not observed and local changes not reported to other peers - the so called **split brain problem**. However, as soon as the network becomes operational again, all changes may be delivered and the nodes held by individual peers **synchronized** with the rest of the database. As long as the delayed reported changes do not affect the same properties of the same nodes, synchronization remains simple - in case of a **conflict**, however, GunDB uses some **metadata** for the affected properties stored along in the same nodes to implement a **last-write-wins** strategy, where later changes overwrite former ones.
 
+### Eventual Consistence ###
+
+### Data Removal ###
+
+### Scalability ###
+
+### Privacy ###
+
+### Persistence ###
 
 (more to come)
 
