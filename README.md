@@ -281,7 +281,7 @@ GunDB provides an official mechanism to extend its API: by adding properties to 
 
 Here are the methods the author has added to GunDB
 
-### Gun.ValueIsData ###
+### &lt;context&gt;.ValueIsData ###
 
 Returns `true` if the given value can be used as data property of a node - or `false` otherwise.
 
@@ -304,7 +304,7 @@ Usage:
 
 > Nota bene: for the sake of simplicity, this function has been designed as a method of the GunDB _context_, although it does not use that context. Implementing it that way, however, avoids having to always ensure that it is invoked as a _static_ method of the "class" `GUN`
 
-### Gun.ValueIsLink ###
+### &lt;context&gt;.ValueIsLink ###
 
 Returns `true` if the given value looks like a link to a GunDB node - or `false` otherwise.
 
@@ -325,7 +325,7 @@ Usage:
 
 > Nota bene: for the sake of simplicity, this function has been designed as a method of the GunDB _context_, although it does not use that context. Implementing it that way, however, avoids having to always ensure that it is invoked as a _static_ method of the "class" `GUN`
 
-### Gun.ValueIsGarbage ###
+### &lt;context&gt;.ValueIsGarbage ###
 
 Returns `true` if the given value is `null` - or `false` otherwise.
 
