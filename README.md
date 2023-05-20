@@ -290,9 +290,17 @@ This behaviour is independent of whether the target node exists or not.
 Multiple properties of any kind may be written in a single operation.
 
 ```
+  Gun.get('a/node').put({
+    'null':    null,
+    'boolean': true,
+    'number':  1.23,
+    'string':  'Hi',
+    'object':  { 'null':null, 'boolean':false, 'number':1.23, 'string':'Hi', 'object':{} },
+    'link':    Gun.get('other/node'),
+  })
 ```
 
-The contents of the given argument are merged with the already existing contents of the addressed node.
+The contents of the given argument are merged with the already existing contents of the addressed node. Again, missing node properties will be created, existing ones overwritten and all other node properties left untouched.
 
 ## Observing Nodes ##
 
