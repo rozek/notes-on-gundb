@@ -289,9 +289,9 @@ This behaviour is independent of whether the target node exists or not.
 
 Not all kinds of parameter names are permitted, some of them even break the GunDB API:
 
-* an attempt to write a property with an empty name `''` either breaks the node or produces strange results ( e.g., `.put({ '':'Hi'})` will actually write `{ '0':'H', '1':'i' }`);
-* an attempt to write a property with the name `_` seems to break the node (as property `_` is used by GunDB itself for a node's metadata);
-* property names containing control characters (even `\0`) seem to work fine;
+* an attempt to write a property with an empty name `''` either breaks the node or produces strange results ( e.g., `.put({ '':'Hi' })` will actually write `{ '0':'H', '1':'i' }`);
+* an attempt to write a property with the name `'_'` seems to break the node (as property `'_'` is already used by GunDB itself for a node's metadata);
+* property names containing control characters (even `'\0'`) seem to work fine;
 * there seems to be no explicit limit on the length of parameter names (I tried 10k which worked)
 
 > **Conclusion: for professonal application development it will be extremely important to harden the API**
