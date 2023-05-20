@@ -175,6 +175,24 @@ The first three variants of `get` finally address the same node (`waitFor` is ex
 
 > As a "rule of thumb" you could expect that the argument of the _first_ `get` method applied to the root node context (i.e., `Gun.get(...)`) may contain slashes and still works as expected - all other `get` calls should avoid arguments with slashes...(yes, the GunDB API is often quite unsystematic)
 
+To drive the illusion further, operations writing nested objects to a given node automatically create new nodes for the nested objects with souls built from the concatenation of the original node's id and the name of the property with the nested object:
+
+```
+  const Context_1 = Gun.get('TestObject')
+    Context_1.put({ nested: {message:'hi!'} })
+  console.log(await PayloadOf(Context_1)) // displays object with link
+
+  const Context_2 = Gun.get('TestObject/nested') // built autoamtically
+  console.log(await PayloadOf(Context_2)) // displays "{message:'hi!'}"
+```
+
+(`PayloadOf` is explained [below](https://github.com/rozek/notes-on-gundb#PayloadOf))
+
+## Working with Nodes and Properties ##
+
+
+
+
 
 
 
@@ -259,6 +277,21 @@ Here are the various utility functions which were used in the code snippets show
   }
 ```
 
+### PayloadOf ###
+
+```
+/**** returns the actual payload of a node given by its context ****/
+
+  async function PayloadOf (Context) {
+    return new Promise((resolve,reject) => {
+      Context.once((Contents) => {
+        let Result = {...Contents} // "Contents" itself must not be modified!
+          delete Result._          // remove any metadata
+        resolve(Result)             
+      })
+    })
+  }
+```
 
 ## License ##
 
