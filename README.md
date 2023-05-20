@@ -134,7 +134,7 @@ It is important to understand that the node(s) represented by a given context do
 
 `Gun` itself represents the root node, `Gun.get(soul)` a node with the given soul, and `context.get(subpath)` a node with the given subpath relative to the given context (see section [Paths](https://github.com/rozek/notes-on-gundb#pathse) for an explanation how the actual node id is built).
 
-Context objects have the following structure (only the most important properties are shown):
+Context objects have the following structure (only the most important properties are shown, consider the [Wiki](https://github.com/amark/gun/wiki/GUN%E2%80%99s-Data-Format-(JSON)) for more details):
 
 ```
 {
@@ -359,6 +359,20 @@ The contents of the given argument are merged with the already existing contents
 ### Certificates ###
 
 ## User Handling ##
+
+### Creating a new User ###
+
+### Logging in ###
+
+### Logging out ###
+
+### Creating a new User with an Alias ###
+
+### Changing a User's Password ###
+
+### When a User's Credentials get compromised.. ###
+
+## Persistence ##
 
 ## Extending the GunDB API ##
 
