@@ -228,6 +228,16 @@ If a node exists, the object returned from `once` will contain a property `_` wi
 
 ### Following Links ###
 
+If a property of a given node looks like a link (i.e., it is an object with the single property `#` which contains a string), then the (always absolute) id of the link target may be extracted and used as an argument for `Gun.get()` in order to address the target node.
+
+```
+  let NodeData = await Gun.get('a/node').Data()
+  let TargetNode = Gun.TargetOfLink(NodeData.link)
+// assuming that 'a/node' has a property 'link' which is a node
+```
+
+> nota bene: these lines use the author's GunDB extensions [Data](https://github.com/rozek/notes-on-gundb#contextdata) and [TargetOfLink](https://github.com/rozek/notes-on-gundb#guntargetoflink)
+
 ### Working with Value Properties
 
 ### Writing Links ###
