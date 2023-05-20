@@ -140,8 +140,8 @@ Context objects have the following structure (only the most important properties
 {
   _ : {
     $: ...,      // points to the current context object
-    root.$: ..., // if present, refers to the root context
-    back.$: ..., // if present, refers to the preceding context
+    root.$: ..., // if present, refers to the root context object
+    back.$: ..., // if present, refers to the previous context object
     soul: ...,   // if present, contains the id of the represented node
     link: ...,   // if present, contains the id of the represented node
     get: ...,    // if present, contains the "key" of the represented node
@@ -522,12 +522,29 @@ Usage:
   const Metadata = await Gun.get('an/existing/node').Metadata()
 ```
 
+### GUN.waitFor ###
 
+Waits for the given number of milliseconds.
 
-## (more to come) ##
+```
+  GUN.waitFor = GUN.chain.waitFor = async function (Duration) {
+    return new Promise((resolve,reject) => {
+      setTimeout(resolve,Duration)
+    })
+  }
+```
+
+Usage:
+
+```
+  await Gun.waitFor(100) // waits for 100ms
+```
+
+> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity (and to reduce the number of potential typos) it may also be applied to a GunDB _context_
 
 ----
 
+(old stuff below)
 
 
 ### Properties and their values ###
@@ -554,20 +571,9 @@ But, from a technical viewpoint, ids are just plain strings and there is no need
 
 Additionally, it is perfectly possible for the "key" part of a "soul" to contain a slash - the only requirement is that a the non-empty "path" in front of a "key" is followed by a slash in order to build a complete "soul". 
 
-### Contexts ###
-
-GunDB uses "contexts" (other people might prefer the term "handles") to refer to a node with a given soul
-
-
-
-
-
-
 ## User Handling ##
 
 "[Users](https://github.com/amark/gun/wiki/User)" in GunDB are actually represented by cryptographic key pairs, "aliases" allow users to be created, looked-up and authenticated by name. Nodes with keys of the form `'~' + publicKey` on the outermost level build the foundation of "user spaces". Trying to write into the space of a given user requires a GunDB client to be authenticated as that user (which requires the proper _private_ key for the public one that builds the user space)
-
-
 
 ### Logging out ###
 
@@ -584,37 +590,6 @@ GunDB uses "contexts" (other people might prefer the term "handles") to refer to
 
 
 
-## Utility Functions ###
-
-Here are the various utility functions which were used in the code snippets shown above:
-
-### waitFor ###
-
-```
-/**** wait a given number of milliseconds ****/
-
-  async function waitFor (Duration) {
-    return new Promise((resolve,reject) => {
-      setTimeout(resolve,Duration)
-    })
-  }
-```
-
-### PayloadOf ###
-
-```
-/**** returns the actual payload of a node given by its context ****/
-
-  async function PayloadOf (Context) {
-    return new Promise((resolve,reject) => {
-      Context.once((Contents) => {
-        let Result = {...Contents} // "Contents" itself must not be modified!
-          delete Result._          // remove any metadata
-        resolve(Result)             
-      })
-    })
-  }
-```
 
 ## License ##
 
