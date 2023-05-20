@@ -124,15 +124,15 @@ Now, add another `<script>` element (either to the `<head>` as well or to the `<
 </script>
 ```
 
-The (probably) strange looking `async` [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) is not strictly necessary, but it allows you to use the [`await` operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) within your code to wait for completion of asynchronous GunDB methods.
+The (perhaps) strange looking `async` [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) is not strictly necessary, but it allows you to use the [`await` operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) within your code in order to wait for completion of asynchronous GunDB methods.
 
 ## Contexts ##
 
-GunDB's **fluent API** is based on the concept of **contexts**:
+GunDB's **fluent API** is based on the concept of **contexts**: many methods (such as `get`, `put`, `on` and others) return a context object which can then be used by the next method. Context objects are a bit like "handles" representing one (or multiple) database nodes - albeit with additional information that can be used to navigate back to the node that was worked with before.
 
 
 
-
+When concatenating method calls in a **chain**, some methods depend on the context returned from the previous call, some don't - the [Wiki](https://github.com/amark/gun/wiki/Chaining-(v0.3.x)) contains a table which shows the various dependencies.
 
 
 
