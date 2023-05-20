@@ -132,7 +132,7 @@ GunDB's **fluent API** is based on the concept of contexts: many methods (such a
 
 It is important to understand that the node(s) represented by a given context do not have to exist in the database - if necessary, they will be created as soon as some data is written to them.
 
-`Gun` itself represents the root node, `Gun.get(soul)` a node with the given soul.
+`Gun` itself represents the root node, `Gun.get(soul)` a node with the given soul, and `context.get(key)` a node with the given key relative to the given context (see section [Paths](https://github.com/rozek/notes-on-gundb#pathse) for an explanation how the actual node soul is built).
 
 Context objects have the following structure (only the most important properties will be shown):
 
@@ -151,11 +151,24 @@ Context objects have the following structure (only the most important properties
 
 When concatenating method calls in a **chain**, some methods depend on the context returned from the previous call, some don't - the [Wiki](https://github.com/amark/gun/wiki/Chaining-(v0.3.x)) contains a table which shows the various dependencies.
 
+## Paths ##
 
+When chaining `get` calls, GunDB concatenates the individually given keys with a slash (`/`) in between to build the soul of the final node. The outcome looks not unlike the path names used in file systems and gives the illusion of a "containment tree". However, it is important to understand that there is no such tree: every node is independent of any other - and even nodes with a soul like `a/b/c` linking to other nodes with souls of the form `a/b/c/d` (or similar) do not _contain_ the nodes they link to!
 
+```
+  const Context_1 = Gun.get('a').get('b').get('c')
+    Context_1.put({ message:'hi!' })  // node must exist for this study
+    await waitFor(100)                // allow "put" to settle
+  console.log(Context_1._.link || Context_1._.link) // displays "a/b/c"
 
+  const Context_2 = Gun.get('a/b').get('c')
+  console.log(Context_2._.link || Context_2._.link) // displays "a/b/c"
 
+  const Context_3 = Gun.get('a/b/c')
+  console.log(Context_3._.link || Context_3._.soul) // displays "a/b/c"
+```
 
+All three variants of `get` finally address the same node
 
 
 
