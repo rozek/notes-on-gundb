@@ -153,7 +153,7 @@ When concatenating method calls in a **chain**, some methods depend on the conte
 
 ## Paths ##
 
-When chaining `get` calls, GunDB concatenates the individually given keys with a slash (`/`) in between to build the soul of the final node. The outcome looks not unlike the path names used in file systems and gives the illusion(!) of a "containment tree". However, it is important to understand that there is no such tree: every node is independent of any other - and even nodes with a soul like `a/b/c` linking to other nodes with souls of the form `a/b/c/d` (or similar) do not _contain_ the nodes they link to!
+When chaining `get` calls, GunDB usually concatenates the individually given arguments with a slash (`/`) in between to build the soul of the final node. The outcome looks not unlike the path names used in file systems and gives the illusion(!) of a "containment tree". However, it is important to understand that there is no such tree: every node is independent of any other - and even nodes with a soul like `a/b/c` linking to other nodes with souls of the form `a/b/c/d` (or similar) do not _contain_ the nodes they link to!
 
 ```
   const Context_1 = Gun.get('a').get('b').get('c')
@@ -166,9 +166,12 @@ When chaining `get` calls, GunDB concatenates the individually given keys with a
 
   const Context_3 = Gun.get('a/b/c')
   console.log(Context_3._.link || Context_3._.soul) // displays "a/b/c"
+
+  const Context_4 = Gun.get('a').get('b/c')
+  console.log(Context_4._.link || Context_4._.soul) // displays "undefined"
 ```
 
-All three variants of `get` finally address the same node (`waitFor` is explained [below](https://github.com/rozek/notes-on-gundb#waitfor))
+The first three variants of `get` finally address the same node (`waitFor` is explained [below](https://github.com/rozek/notes-on-gundb#waitfor))
 
 
 
