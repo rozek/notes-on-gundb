@@ -126,6 +126,10 @@ Now, add another `<script>` element (either to the `<head>` as well or to the `<
 
 The (perhaps) strange looking `async` [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) is not strictly necessary, but it allows you to use the [`await` operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) within your code in order to wait for completion of asynchronous GunDB methods.
 
+### Running GunDB with Options ###
+
+(t.b.w)
+
 ## Contexts ##
 
 GunDB's **fluent API** is based on the concept of contexts: many methods (such as `get`, `put`, `on` and others) return a **context** object which can then be used by the following method. Context objects are a bit like "handles" representing one (or multiple) database nodes - albeit with additional information that can be used to navigate back to the node that was addressed before.
@@ -342,6 +346,8 @@ The contents of the given argument are merged with the already existing contents
 
 ### Waiting for Acknowledgements ###
 
+(put with callback)
+
 ## Observing Nodes ##
 
 ## SEA - Security, Encryption and Authorization ##
@@ -360,13 +366,23 @@ The contents of the given argument are merged with the already existing contents
 
 ## User Handling ##
 
+(GunDB provides some cryptographic protection for users, users do not have to be human beings)
+
 ### Creating a new User ###
 
+(just a cryptographic key pair)
+
 ### Logging in ###
+
+(Gun.user())
 
 ### Logging out ###
 
 ### Creating a new User with an Alias ###
+
+(see [Wiki](https://github.com/amark/gun/wiki/Auth))
+
+### Access Control ###
 
 ### Changing a User's Password ###
 
@@ -382,7 +398,7 @@ The contents of the given argument are merged with the already existing contents
 
 ## Extending the GunDB API ##
 
-GunDB provides an official mechanism to extend its API: by adding properties to `GUN.chain` (where `GUN` is the constructor function, not a GunDB instance) new functions can be injected which can then be called like any other method of a GunDB context:
+GunDB provides an [official mechanism](https://github.com/amark/gun/wiki/Adding-Methods-to-the-Gun-Chain) to extend its API: by adding properties to `GUN.chain` (where `GUN` is the constructor function, not a GunDB instance) new functions can be injected which can then be called like any other method of a GunDB context:
 
 ```
   GUN.chain.Data = async function () {
