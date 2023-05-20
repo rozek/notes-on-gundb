@@ -13,6 +13,10 @@ In the end, these notes will hopefully be less chaotic than the official docs or
 
 > feel free to [open an issue](https://github.com/rozek/notes-on-gundb/issues) if you find errors in my descriptions
 
+## Table of Contents ##
+
+Just as a hint: you can see an outline of these notes and directly navigate to a specific section by clicking on the "list" icon left of the "README.md" title above the "notes-on-gundb" header!
+
 ## GunDB Documentation and Chat ##
 
 **Do not use `https://gun.eco/docs` - use the [GunDB wiki](https://github.com/amark/gun/wiki) instead, it's much better**. The descriptions in this collection will therefore refer to the wiki rather than to the "official" docs.
