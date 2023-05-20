@@ -155,7 +155,7 @@ When concatenating method calls in a **chain**, some methods depend on the conte
 
 ## Paths ##
 
-When chaining `get` calls, GunDB usually concatenates the individually given arguments with a slash (`/`) in between to build the soul of the final node. The outcome looks not unlike the path names used in file systems and gives the illusion(!) of a "containment tree". However, it is important to understand that there is no such tree: every node is independent of any other - and even nodes with a soul like `a/b/c` linking to other nodes with souls of the form `a/b/c/d` (or similar) do not _contain_ the nodes they link to!
+When chaining `get` calls, GunDB usually concatenates the individually given arguments with a slash (`/`) in between to build the id of the final node. The outcome looks not unlike the path names used in file systems and gives the illusion(!) of a "containment tree". However, it is important to understand that there is no such tree: every node is independent of any other - and even nodes with an id like `a/b/c` linking to other nodes with ids of the form `a/b/c/d` (or similar) do not _contain_ the nodes they link to!
 
 ```
   const Context_1 = Gun.get('a').get('b').get('c')
