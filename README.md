@@ -101,7 +101,7 @@ Business data rarely fits directly to a GunDB node as the contents of such a nod
 
 A graph database contains nodes and links. Each node is individually addressable and has to be fetched separately - this should be taken into account when designing the mapping between business data and GunDB nodes. Items of business objects which always belong to these objects should probably be better kept within "their" object (unless size constraints enforce a separate node). On the other hand, items used in multiple places of a business application can naturally be stored in an own node.
 
-(more to come)
+## (more to come) ##
 
 ----
 
