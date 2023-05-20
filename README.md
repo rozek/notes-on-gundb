@@ -159,10 +159,10 @@ When chaining `get` calls, GunDB usually concatenates the individually given arg
   const Context_1 = Gun.get('a').get('b').get('c')
     Context_1.put({ message:'hi!' })  // node must exist for this study
     await waitFor(100)                // allow "put" to settle
-  console.log(Context_1._.link || Context_1._.link) // displays "a/b/c"
+  console.log(Context_1._.link || Context_1._.soul) // displays "a/b/c"
 
   const Context_2 = Gun.get('a/b').get('c')
-  console.log(Context_2._.link || Context_2._.link) // displays "a/b/c"
+  console.log(Context_2._.link || Context_2._.soul) // displays "a/b/c"
 
   const Context_3 = Gun.get('a/b/c')
   console.log(Context_3._.link || Context_3._.soul) // displays "a/b/c"
