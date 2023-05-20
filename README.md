@@ -128,7 +128,7 @@ The (perhaps) strange looking `async` [IIFE](https://developer.mozilla.org/en-US
 
 ## Contexts ##
 
-GunDB's **fluent API** is based on the concept of **contexts**: many methods (such as `get`, `put`, `on` and others) return a context object which can then be used by the next method. Context objects are a bit like "handles" representing one (or multiple) database nodes - albeit with additional information that can be used to navigate back to the node that was addressed before.
+GunDB's **fluent API** is based on the concept of contexts: many methods (such as `get`, `put`, `on` and others) return a **context** object which can then be used by the next method. Context objects are a bit like "handles" representing one (or multiple) database nodes - albeit with additional information that can be used to navigate back to the node that was addressed before.
 
 It is important to understand that the node(s) represented by a given context do not have to exist in the database - if necessary, they will be created as soon as some data is written to them.
 
