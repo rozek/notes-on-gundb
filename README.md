@@ -312,7 +312,7 @@ Returns `true` if the given value looks like a link to a GunDB node - or `false`
   GUN.ValueIsLink = GUN.chain.ValueIsLink = function (Value) {
     return (
       (Value != null) && (typeof Value === 'object') &&
-      (typeof Value['#'] === 'string')
+      (Value._ != null) && (typeof Value['#'] === 'string')
     )
   }
 ```
