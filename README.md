@@ -203,7 +203,7 @@ As mentioned above, nodes may be addressed using the [get](https://github.com/am
 
 ### Reading Nodes ###
 
-`once` can be used to retrieve (a snapshot of) the actual contents of a given node - including its actual payload and some metadata.
+`once` can be used to retrieve (a snapshot of) the contents of a given node - including its actual payload and some metadata.
 
 ```
   async function ContentsOf (Context) {
