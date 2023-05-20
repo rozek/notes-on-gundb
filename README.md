@@ -15,7 +15,7 @@ In the end, these notes will hopefully be less chaotic than the official docs or
 
 ## Table of Contents ##
 
-Just as a hint: you can see an outline of these notes and directly navigate to a specific section by clicking on the "list" icon left of the "README.md" title above the "notes-on-gundb" header!
+Just as a hint: you can see an outline of these notes and directly navigate to a specific section by clicking on the "list" icon left of the "README.md" title above the "notes-on-gundb" header - or at the top of this window in case that you already had to scroll down!
 
 ## GunDB Documentation and Chat ##
 
