@@ -281,12 +281,12 @@ GunDB provides an official mechanism to extend its API: by adding properties to 
 
 Here are the methods the author has added to GunDB
 
-### &lt;context&gt;.ValueIsData ###
+### GUN.ValueIsData ###
 
 Returns `true` if the given value can be used as data property of a node - or `false` otherwise.
 
 ```
-  GUN.chain.ValueIsData = function (Value) {
+  GUN.ValueIsData = GUN.chain.ValueIsData = function (Value) {
     switch (typeof Value) {
       case 'boolean':
       case 'number':
@@ -299,17 +299,17 @@ Returns `true` if the given value can be used as data property of a node - or `f
 Usage:
 
 ```
-  if (Gun.ValueIsData(Value)) { ... }
+  if (GUN.ValueIsData(Value)) { ... }
 ```
 
-> Nota bene: for the sake of simplicity, this function has been designed as a method of the GunDB _context_, although it does not use that context. Implementing it that way, however, avoids having to always ensure that it is invoked as a _static_ method of the "class" `GUN`
+> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for sake of simplicity it may also be applied to a GunDB _context_, which simply reduces the number of potential typos 
 
-### &lt;context&gt;.ValueIsLink ###
+### GUN.ValueIsLink ###
 
 Returns `true` if the given value looks like a link to a GunDB node - or `false` otherwise.
 
 ```
-  GUN.chain.ValueIsLink = function (Value) {
+  GUN.ValueIsLink = GUN.chain.ValueIsLink = function (Value) {
     return (
       (Value != null) && (typeof Value === 'object') &&
       (typeof Value['#'] === 'string')
@@ -320,17 +320,17 @@ Returns `true` if the given value looks like a link to a GunDB node - or `false`
 Usage:
 
 ```
-  if (Gun.ValueIsLink(Candidate)) { ... }
+  if (GUN.ValueIsLink(Candidate)) { ... }
 ```
 
-> Nota bene: for the sake of simplicity, this function has been designed as a method of the GunDB _context_, although it does not use that context. Implementing it that way, however, avoids having to always ensure that it is invoked as a _static_ method of the "class" `GUN`
+> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for sake of simplicity it may also be applied to a GunDB _context_, which simply reduces the number of potential typos 
 
-### &lt;context&gt;.ValueIsGarbage ###
+### GUN.ValueIsGarbage ###
 
 Returns `true` if the given value is `null` - or `false` otherwise.
 
 ```
-  GUN.chain.ValueIsGarbage = function (Value) {
+  GUN.ValueIsGarbage = GUN.chain.ValueIsGarbage = function (Value) {
     return (Value === null)
   }
 ```
@@ -338,10 +338,10 @@ Returns `true` if the given value is `null` - or `false` otherwise.
 Usage:
 
 ```
-  if (Gun.ValueIsGarbage(Candidate)) { ... }
+  if (GUN.ValueIsGarbage(Candidate)) { ... }
 ```
 
-> Nota bene: for the sake of simplicity, this function has been designed as a method of the GunDB _context_, although it does not use that context. Implementing it that way, however, avoids having to always ensure that it is invoked as a _static_ method of the "class" `GUN`
+> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for sake of simplicity it may also be applied to a GunDB _context_, which simply reduces the number of potential typos 
 
 ### &lt;context&gt;.Contents ###
 
