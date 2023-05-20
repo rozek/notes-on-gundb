@@ -286,7 +286,7 @@ Here are the methods the author has added to GunDB
 Returns `true` if the given value can be used as data property of a node - or `false` otherwise.
 
 ```
-  GUN.ValueIsData = function (Value) {
+  GUN.chain.ValueIsData = function (Value) {
     switch (typeof Value) {
       case 'boolean':
       case 'number':
@@ -299,15 +299,17 @@ Returns `true` if the given value can be used as data property of a node - or `f
 Usage:
 
 ```
-  if (GUN.ValueIsData(Value)) { ... }
+  if (Gun.ValueIsData(Value)) { ... }
 ```
+
+> Nota bene: for the sake of simplicity, this function has been designed as a method of the GunDB _context_, although it does not use that context. Implementing it that way, however, avoids having to always ensure that it is invoked as a _static_ method of the "class" `GUN`
 
 ### Gun.ValueIsLink ###
 
 Returns `true` if the given value looks like a link to a GunDB node - or `false` otherwise.
 
 ```
-  GUN.ValueIsLink = function (Value) {
+  GUN.chain.ValueIsLink = function (Value) {
     return (
       (Value != null) && (typeof Value === 'object') &&
       (typeof Value['#'] === 'string')
@@ -318,15 +320,17 @@ Returns `true` if the given value looks like a link to a GunDB node - or `false`
 Usage:
 
 ```
-  if (GUN.ValueIsLink(Candidate)) { ... }
+  if (Gun.ValueIsLink(Candidate)) { ... }
 ```
+
+> Nota bene: for the sake of simplicity, this function has been designed as a method of the GunDB _context_, although it does not use that context. Implementing it that way, however, avoids having to always ensure that it is invoked as a _static_ method of the "class" `GUN`
 
 ### Gun.ValueIsGarbage ###
 
 Returns `true` if the given value is `null` - or `false` otherwise.
 
 ```
-  GUN.ValueIsGarbage = function (Value) {
+  GUN.chain.ValueIsGarbage = function (Value) {
     return (Value === null)
   }
 ```
@@ -334,9 +338,10 @@ Returns `true` if the given value is `null` - or `false` otherwise.
 Usage:
 
 ```
-  if (GUN.ValueIsGarbage(Candidate)) { ... }
+  if (Gun.ValueIsGarbage(Candidate)) { ... }
 ```
 
+> Nota bene: for the sake of simplicity, this function has been designed as a method of the GunDB _context_, although it does not use that context. Implementing it that way, however, avoids having to always ensure that it is invoked as a _static_ method of the "class" `GUN`
 
 ### &lt;context&gt;.Contents ###
 
