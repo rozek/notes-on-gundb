@@ -101,7 +101,7 @@ Business data rarely fits directly to a GunDB node as the contents of such a nod
 
 A graph database contains nodes and links. Each node is individually addressable and has to be fetched separately - this should be taken into account when designing the mapping between business data and GunDB nodes. Items of business objects which always belong to these objects should probably be better kept within "their" object (unless size constraints enforce a separate node). On the other hand, items used in multiple places of a business application can naturally be stored in an own node.
 
-## Attaching GunDB ##
+## First Steps ##
 
 GunDB can be used directly in the browser without having to "build" (or "pack") an application before (this case is sometimes called a **no-build environment**). As a consequence, it is sufficient to simply add the following elements to the `<head>` section of a web page:
 
@@ -109,7 +109,8 @@ GunDB can be used directly in the browser without having to "build" (or "pack") 
 <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 ```
 
-and then use one of the global variables `Gun` or `GUN` directly.
+and then use one of the global variables `Gun` or `GUN` directly. (For other variants - such as the usage as an ECMAScript module (ESM) or the usage within Node.js please consider the [Wiki](https://github.com/amark/gun/wiki/Getting-Started-(v0.3.x)))
+
 
 
 
