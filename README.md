@@ -238,7 +238,7 @@ If a property of a given node looks like a link (i.e., it is an object with the 
 
 > nota bene: these lines use the author's GunDB extensions [Data](https://github.com/rozek/notes-on-gundb#contextdata) and [TargetOfLink](https://github.com/rozek/notes-on-gundb#guntargetoflink)
 
-### Working with plain Node Properties ###
+### Working with Node Properties ###
 
 The properties of a node given by its context can be written with `put`, providing a plain JavaScript object containing a key-value pair with "key" being the name of the property and "value" the value to be written:
 
@@ -253,7 +253,7 @@ Missing properties will be created, existing ones overwritten - regardless of th
 * nested objects (see below) or
 * node contexts (see below)
 
-Normally, writing `null` into a property marks it as "garbage".
+By convention, writing `null` into a property marks it as "garbage" and creates a "tombstone" for it.
 
 If a given node does not yet exist, it will be created on-the-fly:
 
@@ -266,9 +266,13 @@ If a given node does not yet exist, it will be created on-the-fly:
 An attempt to set a (nested) object to a property will create an additional node and write a link to that node into the property. The new node will have an id which consists of the original node's "soul", a slash (`/`) and the name of the property receiving the link:
 
 ```
-  Gun.get('an/outer-node').put({ 'inner-node':{ 'data':'automatically created' } })
+  Gun.get('an/outer-node').put({ 'inner-node':{ 'data':'will be created' } })
 // will create 'an/outer-node/inner-node' with the sole property 'data'
 ```
+
+#### Allowed Property Names ####
+
+
 
 
 ### Writing Links ###
