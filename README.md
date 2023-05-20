@@ -71,7 +71,11 @@ By design, graph databases may grow as much as desired: an unlimited number of p
 
 ### Privacy ###
 
+In an open peer-to-peer distributed system there is by design no "privacy" - at first. There are, however, mechanisms (based on cryptography) which can provide some protection: **digital signatures** prevent others from writing into a given user space (unless explicit **certificates** allow them to do so), **(symmetric) encryption** protects property values from being read by others, and **asymmetric encryption** allow for the exchange of information between explicitly given users.
 
+Nevertheless, in order to allow for synchronization in a peer-to-peer network, the souls of nodes and the names of node properties always have to be kept readable for others - only property _values_ can be encrypted. While the encryption of links may be technically feasible, doing so would break navigation using the GunDB API: if you really have to encrypt your links, you will also have to implement your own function to follow them.
+
+Thus, when modelling your database, always keep in mind that the contents of any node is principally visible for everybody. Even if you encrypt node property values, some metadata remains visible (namely the souls and property names of your nodes) - you will have to obfuscate them as well, if you want to make spying more difficult.
 
 ### Persistence ###
 
