@@ -203,6 +203,17 @@ As mentioned above, nodes may be addressed using the [get](https://github.com/am
 
 > Nota bene: a node does not have to exist in order to be addressed
 
+* an attempt to address a node with an empty id (`''`) will log(!) the error message "0 length key!" (rather than throwing an exception)
+* node ids may contain control characters (even `\0`)
+* node ids may contain any number of slashes
+* node id `~` is permitted
+* node id `~@` will log(!) an error _object_ containing the error message "Alias not same!" (rather than throwing an exception)
+* node ids of the form `~@xxx` will also log(!) such an error _object_ unless the client has previously been authenticated using the alias following the `~@`
+* node ids of the form `~xxx` work fine unless the character sequence following the `~` looks like a public key and the client has not been authenticated using a key pair containing that public key: in such a case an error _object_ with the error message "Unverified data." is logged(!) (rather than throwing an exception)
+* there does not seem to be an explicit limit for node ids (I tried 10k long ids which worked)
+
+> **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any tracebacks **
+
 ### Reading Nodes ###
 
 `once` can be used to retrieve (a snapshot of) the contents of a given node - including its actual payload and some metadata.
