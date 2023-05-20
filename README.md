@@ -59,7 +59,7 @@ Nevertheless, a network outage may always disconnect some peers from the rest of
 
 Principally, the clients of a graph database never know if the data they received so far is complete and up-to-date - there could always remain one last peer which stores the final bit of information to make the image complete, but which has unfortunately been disconnected from the rest of the network until now.
 
-By design, graph databases can only guarantee that their contents become **eventually consistent**, i.e., that they synchronize as soon as disconnected peers get connected again.
+By design, graph databases can only guarantee that their contents become **eventually consistent**, i.e., that they synchronize as soon as disconnected peers get connected again. On the other side, however, this restriction allows any client to keep working with the database even in the case of a "failure" (e.g., a network partition) as there is no central server which could be "down".
 
 As a consequence, the clients of a graph database should always listen to (and react on) incoming changes of the nodes they have requested before. Graph databases are **dynamic databases**.
 
