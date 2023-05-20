@@ -190,14 +190,42 @@ To drive the illusion further, operations writing nested objects to a given node
 
 ## Working with Nodes and Properties ##
 
+### Addressing Nodes ###
 
+### Reading Nodes ###
 
+### Following Links ###
 
+### Working with Value Properties
 
+### Writing Links ###
 
+### Patching Nodes ###
 
+Multiple properties of any kind may be written in a single operation.
 
+```
+```
 
+The contents of the given argument are merged with the already existing contents of the addressed node.
+
+## Observing Nodes ##
+
+## SEA - Security, Encryption and Authorization ##
+
+### Keypair Generation ###
+
+### Symmetric Encryption ###
+
+### Signing ###
+
+### Proof-of-Work ###
+
+### Asymmetric Encryption ###
+
+### Certificates ###
+
+## User Handling ##
 
 
 
