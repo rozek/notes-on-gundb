@@ -263,7 +263,7 @@ Missing properties will be created, existing ones overwritten - regardless of th
 
 * `null`,
 * boolean, number or string primitives,
-* nested objects (see below),
+* nested objects,
 * links or
 * node contexts (see below)
 
@@ -301,7 +301,7 @@ This behaviour is independent of whether the target node exists or not.
 
 > **Conclusion: for professonal application development it will be extremely important to harden the API**
 
-#### Allowed Property Names ####
+#### Allowed Property Names (in general) ####
 
 Not all kinds of parameter names are permitted, some of them even break the GunDB API:
 
@@ -311,6 +311,17 @@ Not all kinds of parameter names are permitted, some of them even break the GunD
 * there seems to be no explicit limit on the length of parameter names (I tried 10k which worked)
 
 > **Conclusion: for professonal application development it will be extremely important to harden the API**
+
+#### Allowed Property Names (when writing nested Objects) ####
+
+Since property names play a special role when used to write nested objects (and, thus, create new GunDB nodes) they have their own restrictions:
+
+* an attempt to write a nested object into a property with an empty name (`''`) will
+  * instead write a link to the node which is currently worked on and
+  * write all properties of the nested object into that node itself
+* property names of the form `~`, `~@`, `~@xxx` or `~xxx` will always write their links (as intended) but fail to create the target nodes unless the constraints described [above](https://github.com/rozek/notes-on-gundb#addressing-nodes) are met
+
+> **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any tracebacks**
 
 ### Patching Nodes ###
 
