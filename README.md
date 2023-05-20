@@ -179,11 +179,11 @@ To drive the illusion further, operations writing nested objects to a given node
 
 ```
   const Context_1 = Gun.get('TestObject')
-    Context_1.put({ nested: {message:'hi!'} })   // writes a nested object
+    Context_1.put({ nested: {message:'hi!'} })    // writes a nested object
   console.log(await PayloadOf(Context_1)) // displays an object with a link
 
-  const Context_2 = Gun.get('TestObject/nested') // built automatically
-  console.log(await PayloadOf(Context_2)) // displays "{message:'hi!'}"
+  const Context_2 = Gun.get('TestObject/nested') // was built automatically
+  console.log(await PayloadOf(Context_2))     // displays "{message:'hi!'}"
 ```
 
 (`PayloadOf` is explained [below](https://github.com/rozek/notes-on-gundb#PayloadOf))
@@ -191,6 +191,15 @@ To drive the illusion further, operations writing nested objects to a given node
 ## Working with Nodes and Properties ##
 
 ### Addressing Nodes ###
+
+As mentioned above, nodes may be addressed using the [get](https://github.com/amark/gun/wiki/API-(v0.3.x)#get) method:
+
+```
+  const Context_1 = Gun.get('a').get('b').get('c')
+  const Context_2 = Gun.get('a/b/c')
+```
+
+> Nota bene: a node does not have to exist in order to be addressed
 
 ### Reading Nodes ###
 
