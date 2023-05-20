@@ -139,12 +139,14 @@ Context objects have the following structure (only the most important properties
 ```
 {
   _ : {
-    back: ..., // if present, can be used to navigate back
-    soul: ..., // if present, contains the id of the represented node
-    link: ..., // if present, contains the id of the represented node
-    get: ...,  // if present, contains the "key" of the represented node
-    put: ...,  // if present, contains the known contents of the...
-               // ...represented node including any metadata
+    $: ...,      // points to the current context object
+    root.$: ..., // if present, refers to the root context
+    back.$: ..., // if present, refers to the preceding context
+    soul: ...,   // if present, contains the id of the represented node
+    link: ...,   // if present, contains the id of the represented node
+    get: ...,    // if present, contains the "key" of the represented node
+    put: ...,    // if present, contains the known contents of the...
+                 // ...represented node including any metadata
   }
 }
 ```
