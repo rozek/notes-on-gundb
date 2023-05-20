@@ -258,7 +258,7 @@ By convention, writing `null` into a property marks it as "garbage" and creates 
 If a given node does not yet exist, it will be created on-the-fly:
 
 ```
-// let 'a/missing/node' not yet exist
+// assume that 'a/missing/node' does not yet exist
   Gun.get('a/missing/node').put({ 'property-name':'value' })
 // the node will exist now
 ```
