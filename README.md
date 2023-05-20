@@ -273,7 +273,7 @@ An attempt to assign a (nested) object to a property will create an additional n
 // will create 'an/outer-node/inner-node' with the sole property 'data'
 ```
 
-An attempt to write an array into a property will log(!) the error message "Invalid data: Array at ..." (instead of throwing an exception). Trying to read the contents of the addressed node may lock the application (the `once` callback will never be called)
+> **Dangerous**: an attempt to write an array into a property will log(!) the error message "Invalid data: Array at ..." (instead of throwing an exception). Trying to read the contents of the addressed node may lock the application (the `once` callback will never be called)
 
 An attempt to assign an object of the form `{ '#':'...' }` (i.e., a link) to a property will principally write the given link. However,
 
@@ -294,8 +294,8 @@ This behaviour is independent of whether the target node exists or not.
 
 Not all kinds of parameter names are permitted, some of them even break the GunDB API:
 
-* an attempt to write a property with an empty name `''` either breaks the node or produces strange results ( e.g., `.put({ '':'Hi' })` will actually write `{ '0':'H', '1':'i' }`);
-* an attempt to write a property with the name `'_'` seems to break the node (as property `'_'` is already used by GunDB itself for a node's metadata);
+* **Dangerous**: an attempt to write a property with an empty name `''` either breaks the node or produces strange results ( e.g., `.put({ '':'Hi' })` will actually write `{ '0':'H', '1':'i' }`);
+* **Dangerous**: an attempt to write a property with the name `'_'` seems to break the node (as property `'_'` is already used by GunDB itself for a node's metadata);
 * property names containing control characters (even `'\0'`) seem to work fine;
 * there seems to be no explicit limit on the length of parameter names (I tried 10k which worked)
 
