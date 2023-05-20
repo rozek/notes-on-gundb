@@ -101,7 +101,7 @@ Business data rarely fits directly to a GunDB node as the contents of such a nod
 
 A graph database contains nodes and links. Each node is individually addressable and has to be fetched separately - this should be taken into account when designing the mapping between business data and GunDB nodes. Items of business objects which always belong to these objects should probably be better kept within "their" object (unless size constraints enforce a separate node). On the other hand, items used in multiple places of a business application can naturally be stored in an own node.
 
-## First Steps ##
+## Preparational Steps ##
 
 GunDB can be used directly in the browser without having to "build" (or "pack") an application before (this case is sometimes called a **no-build environment**). As a consequence, it is sufficient to simply add the following elements to the `<head>` section of a web page:
 
@@ -124,7 +124,22 @@ Now, add another `<script>` element (either to the `<head>` as well or to the `<
 </script>
 ```
 
-The (probably) strange looking `async` [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) is not strictly necessary, but it allows you to use the [`await` operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) within your code to wait for completion of asnychronous GunDB methods.
+The (probably) strange looking `async` [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) is not strictly necessary, but it allows you to use the [`await` operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) within your code to wait for completion of asynchronous GunDB methods.
+
+## Contexts ##
+
+GunDB's **fluent API** is based on the concept of **contexts**:
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## (more to come) ##
