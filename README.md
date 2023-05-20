@@ -227,6 +227,90 @@ The contents of the given argument are merged with the already existing contents
 
 ## User Handling ##
 
+## Extending the GunDB API ##
+
+GunDB provides an official mechanism to extend its API: by adding properties to `GUN.chain` (where `GUN` is the constructor function, not a GunDB instance) new functions can be injected which can then be called like methods of any GunDB context:
+
+```
+  GUN.chain.Data = async function () {
+    return new Promise((resolve,reject) => {
+      this.once((Contents) => {
+        const Result = {...Contents} // "Contents" must not be modified!
+          delete Result._
+        resolve(Result)
+      })
+    })
+  }
+
+  const Data = await Gun.get('an/existing/node').Data()
+```
+
+## Potential Extensions of the GunDB API ##
+
+Here are the methods the author has added to GunDB
+
+### Contents ###
+
+Retrieves the full contents (i.e., data and metadata) of a node given by its context
+
+```
+  GUN.chain.Contents = async function () {
+    return new Promise((resolve,reject) => {
+      this.once((Contents) => {
+        return {...Contents} // "Contents" must not be modified!
+      })
+    })
+  }
+```
+
+Usage:
+
+```
+  const Contents = await Gun.get('an/existing/node').Contents()
+```
+
+### Data ###
+
+Retrieves the payload of a node given by its context
+
+```
+  GUN.chain.Data = async function () {
+    return new Promise((resolve,reject) => {
+      this.once((Contents) => {
+        const Result = {...Contents} // "Contents" must not be modified!
+          delete Result._
+        resolve(Result)
+      })
+    })
+  }
+```
+
+Usage:
+
+```
+  const Data = await Gun.get('an/existing/node').Data()
+```
+
+### Metadata ###
+
+Retrieves the metadata of a node given by its context
+
+```
+  GUN.chain.Metadata = async function () {
+    return new Promise((resolve,reject) => {
+      this.once((Contents) => {
+        return {...Contents._} // "Contents" must not be modified!
+      })
+    })
+  }
+```
+
+Usage:
+
+```
+  const Metadata = await Gun.get('an/existing/node').Metadata()
+```
+
 
 
 ## (more to come) ##
