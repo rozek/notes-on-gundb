@@ -281,7 +281,64 @@ GunDB provides an official mechanism to extend its API: by adding properties to 
 
 Here are the methods the author has added to GunDB
 
-### Contents ###
+### Gun.ValueIsData ###
+
+Returns `true` if the given value can be used as data property of a node - or `false` otherwise.
+
+```
+  GUN.ValueIsData = function (Value) {
+    switch (typeof Value) {
+      case 'boolean':
+      case 'number':
+      case 'string':  return true
+      default:        return false
+    }
+  }
+```
+
+Usage:
+
+```
+  if (GUN.ValueIsData(Value)) { ... }
+```
+
+### Gun.ValueIsLink ###
+
+Returns `true` if the given value looks like a link to a GunDB node - or `false` otherwise.
+
+```
+  GUN.ValueIsLink = function (Value) {
+    return (
+      (Value != null) && (typeof Value === 'object') &&
+      (typeof Value['#'] === 'string')
+    )
+  }
+```
+
+Usage:
+
+```
+  if (GUN.ValueIsLink(Candidate)) { ... }
+```
+
+### Gun.ValueIsGarbage ###
+
+Returns `true` if the given value is `null` - or `false` otherwise.
+
+```
+  GUN.ValueIsGarbage = function (Value) {
+    return (Value === null)
+  }
+```
+
+Usage:
+
+```
+  if (GUN.ValueIsGarbage(Candidate)) { ... }
+```
+
+
+### &lt;context&gt.Contents ###
 
 Retrieves the full contents (i.e., data and metadata) of a node given by its context
 
@@ -309,7 +366,7 @@ Upon completion
 
 All other properties of `Content` will contain the currently known values and links of the node.
 
-### Data ###
+### &lt;context&gt.Data ###
 
 Retrieves the payload of a node given by its context
 
@@ -331,7 +388,7 @@ Usage:
   const Data = await Gun.get('an/existing/node').Data()
 ```
 
-### Metadata ###
+### &lt;context&gt.Metadata ###
 
 Retrieves the metadata of a node given by its context
 
