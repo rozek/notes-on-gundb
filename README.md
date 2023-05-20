@@ -338,7 +338,7 @@ Usage:
 ```
 
 
-### &lt;context&gt.Contents ###
+### &lt;context&gt;.Contents ###
 
 Retrieves the full contents (i.e., data and metadata) of a node given by its context
 
@@ -366,7 +366,7 @@ Upon completion
 
 All other properties of `Content` will contain the currently known values and links of the node.
 
-### &lt;context&gt.Data ###
+### &lt;context&gt;.Data ###
 
 Retrieves the payload of a node given by its context
 
@@ -388,7 +388,7 @@ Usage:
   const Data = await Gun.get('an/existing/node').Data()
 ```
 
-### &lt;context&gt.Metadata ###
+### &lt;context&gt;.Metadata ###
 
 Retrieves the metadata of a node given by its context
 
