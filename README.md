@@ -252,7 +252,8 @@ Missing properties will be created, existing ones overwritten - regardless of th
 
 * `null`,
 * boolean, number or string primitives,
-* nested objects (see below) or
+* nested objects (see below),
+* links or
 * node contexts (see below)
 
 By convention, writing `null` into a property marks it as "garbage" and creates a "tombstone" for it.
@@ -265,14 +266,18 @@ If a given node does not yet exist, it will be created on-the-fly:
 // the node will exist now
 ```
 
-An attempt to set a (nested) object to a property will create an additional node and write a link to that node into the property. The new node will have an id which consists of the original node's "soul", a slash (`/`) and the name of the property receiving the link:
+An attempt to assign a (nested) object to a property will create an additional node and write a link to that node into the property. The new node will have an id which consists of the original node's "soul", a slash (`/`) and the name of the property receiving the link:
 
 ```
   Gun.get('an/outer-node').put({ 'inner-node':{ data:'will be created' } })
 // will create 'an/outer-node/inner-node' with the sole property 'data'
 ```
 
-An attempt to write an array to a property will log(!) the error message "Invalid data: Array at ..." (instead of throwing an exception). Trying to read the contents of the addressed node may lock the application (the `once` callback will never be called)
+An attempt to write an array into a property will log(!) the error message "Invalid data: Array at ..." (instead of throwing an exception). Trying to read the contents of the addressed node may lock the application (the `once` callback will never be called)
+
+An attempt to assign an object of the form `{ '#':'...' }` (i.e., a link) to a property will principally write the given link. However,
+
+* an attempt to write an empty link `{ '#':'' }` will instead write a link to a node with an id consisting of the id of the original node, a slash `/` and the name of the property written to (this _could_ be an undocumented feature, though)
 
 An attempt to write a GunDB context object into a node property will write a link to the addressed node instead:
 
