@@ -302,7 +302,7 @@ Usage:
   if (GUN.ValueIsData(Value)) { ... }
 ```
 
-> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for sake of simplicity it may also be applied to a GunDB _context_, which simply reduces the number of potential typos 
+> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity it may also be applied to a GunDB _context_, which simply reduces the number of potential typos 
 
 ### GUN.ValueIsLink ###
 
@@ -323,7 +323,7 @@ Usage:
   if (GUN.ValueIsLink(Candidate)) { ... }
 ```
 
-> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for sake of simplicity it may also be applied to a GunDB _context_, which simply reduces the number of potential typos 
+> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity it may also be applied to a GunDB _context_, which simply reduces the number of potential typos 
 
 ### GUN.ValueIsGarbage ###
 
@@ -341,7 +341,7 @@ Usage:
   if (GUN.ValueIsGarbage(Candidate)) { ... }
 ```
 
-> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for sake of simplicity it may also be applied to a GunDB _context_, which simply reduces the number of potential typos 
+> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity it may also be applied to a GunDB _context_, which simply reduces the number of potential typos 
 
 ### &lt;context&gt;.Contents ###
 
