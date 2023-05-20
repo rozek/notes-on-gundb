@@ -107,13 +107,24 @@ GunDB can be used directly in the browser without having to "build" (or "pack") 
 
 ```
 <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
 ```
 
-and then use one of the global variables `Gun` or `GUN` directly. (For other variants - such as the usage as an ECMAScript module (ESM) or the usage within Node.js please consider the [Wiki](https://github.com/amark/gun/wiki/Getting-Started-(v0.3.x)))
+You may then use one of the global variables `Gun` or `GUN` directly. (For other variants - such as the usage as an ECMAScript module (ESM) or the usage within Node.js please consider the [Wiki](https://github.com/amark/gun/wiki/Getting-Started-(v0.3.x)))
 
+Now, add another `<script>` element (either to the `<head>` as well or to the `<body>` section) with your own code:
 
+```
+<script>
+  const Gun = new GUN()
+  
+  ;(async () => {
+    ...
+  })()
+</script>
+```
 
-
+The (probably) strange looking `async` [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) is not strictly necessary, but it allows you to use the [`await` operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) within your code to wait for completion of asnychronous GunDB methods.
 
 
 ## (more to come) ##
