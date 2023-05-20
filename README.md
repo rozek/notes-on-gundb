@@ -302,6 +302,8 @@ Multiple properties of any kind may be written in a single operation.
 
 The contents of the given argument are merged with the already existing contents of the addressed node: i.e., missing node properties will be created, existing ones overwritten and all other node properties left untouched.
 
+### Waiting for Acknowledgements ###
+
 ## Observing Nodes ##
 
 ## SEA - Security, Encryption and Authorization ##
