@@ -281,12 +281,12 @@ GunDB provides an official mechanism to extend its API: by adding properties to 
 
 Here are the methods the author has added to GunDB
 
-### GUN.ValueIsData ###
+### GUN.ValueIsPlain ###
 
-Returns `true` if the given value can be used as data property of a node - or `false` otherwise.
+Returns `true` if the given value can be used as plain data property of a node - or `false` otherwise.
 
 ```
-  GUN.ValueIsData = GUN.chain.ValueIsData = function (Value) {
+  GUN.ValueIsPlain = GUN.chain.ValueIsPlain = function (Value) {
     switch (typeof Value) {
       case 'boolean':
       case 'number':
@@ -299,10 +299,10 @@ Returns `true` if the given value can be used as data property of a node - or `f
 Usage:
 
 ```
-  if (GUN.ValueIsData(Value)) { ... }
+  if (GUN.ValueIsPlain(Value)) { ... }
 ```
 
-> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity it may also be applied to a GunDB _context_, which simply reduces the number of potential typos 
+> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity (and to reduce the number of potential typos) it may also be applied to a GunDB _context_
 
 ### GUN.ValueIsLink ###
 
@@ -323,7 +323,7 @@ Usage:
   if (GUN.ValueIsLink(Candidate)) { ... }
 ```
 
-> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity it may also be applied to a GunDB _context_, which simply reduces the number of potential typos 
+> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity (and to reduce the number of potential typos) it may also be applied to a GunDB _context_
 
 ### GUN.ValueIsGarbage ###
 
@@ -341,7 +341,51 @@ Usage:
   if (GUN.ValueIsGarbage(Candidate)) { ... }
 ```
 
-> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity it may also be applied to a GunDB _context_, which simply reduces the number of potential typos 
+> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity (and to reduce the number of potential typos) it may also be applied to a GunDB _context_
+
+### GUN.TargetIdOfLink ###
+
+Returns the id of the node a given link is pointing to - or throws an error if the given value is not a GunDB link.
+
+```
+  GUN.TargetIdOfLink = GUN.chain.TargetIdOfLink = function (Value) {
+    if (GUN.ValueIsLink(Value)) {                     // keep implementation DRY
+      return Value._['#']
+    } else {
+      throw new TypeError('the given argument is not a GunDB link')
+    }
+  }
+```
+
+Usage:
+
+```
+// 'node' shall contain a property 'nextNode' which is a link
+  let NodeData = await Gun.get('node').Data()
+  let TargetId = GUN.TargetIdOfLink(NodeData).nextNode
+```
+
+> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity (and to reduce the number of potential typos) it may also be applied to a GunDB _context_
+
+### GUN.TargetOfLink ###
+
+Returns the a context of the node a given link is pointing to - or throws an error if the given value is not a GunDB link.
+
+```
+  GUN.TargetOfLink = GUN.chain.TargetOfLink = function (Value) {
+    return GUN().get(GUN.TargetIdOfLink(Value))       // keep implementation DRY
+  }
+```
+
+Usage:
+
+```
+// 'node' shall contain a property 'nextNode' which is a link
+  let NodeData = await Gun.get('node').Data()
+  let Target   = GUN.TargetOfLink(NodeData).nextNode
+```
+
+> Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity (and to reduce the number of potential typos) it may also be applied to a GunDB _context_
 
 ### &lt;context&gt;.Contents ###
 
