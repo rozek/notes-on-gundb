@@ -173,6 +173,7 @@ When chaining `get` calls, GunDB usually concatenates the individually given arg
 
 The first three variants of `get` finally address the same node (`waitFor` is explained [below](https://github.com/rozek/notes-on-gundb#waitfor))
 
+As a "rule of thumb" you could expect that the argument of the first `get` method applied to the root node context may contain slashes and still works as expected - all other `get` calls should avoid arguments with slashes...(yes, the GunDB API is often quite unsystematic)
 
 
 
