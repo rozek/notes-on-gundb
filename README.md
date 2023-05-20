@@ -226,7 +226,7 @@ As mentioned above, nodes may be addressed using the [get](https://github.com/am
 
 If a node exists, the object returned from `once` will contain a property `_` (with the node's metadata) and all other properties the node holds at the moment (if any). If a node does not exist, the returned object will be empty.
 
-> Nota bene: if preferred, you may also extend GunDB with a method which returns the payload of a node given by its context, as shown [below](https://github.com/rozek/notes-on-gundb#contents)
+> Nota bene: if preferred, you may also extend GunDB with a method which returns the actual payload of a node given by its context, as shown [below](https://github.com/rozek/notes-on-gundb#contextdata)
 
 ### Following Links ###
 
