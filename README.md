@@ -203,6 +203,29 @@ As mentioned above, nodes may be addressed using the [get](https://github.com/am
 
 ### Reading Nodes ###
 
+`once` can be used to retrieve (a snapshot of) the actual contents of a given node - including its actual payload and some metadata.
+
+```
+  async function ContentsOf (Context) {
+    return new Promise((resolve,reject) => {
+      Context.once((Contents) => {
+        resolve({...Contents})               // "Contents" must not be modified!
+      })
+    })
+  }
+
+  const Context_1 = Gun.get('TestObject')
+    Context_1.put({ nested: {message:'hi!'} })
+  console.log(await ContentsOf(Context_1))
+
+  const Context_2 = Gun.get('an/unknown/node')
+  console.log(await ContentsOf(Context_2))
+```
+
+If a node exists, the object returend from `once` will contain a property `_` with the node's metadata and, perhaps, all other properties the node holds at the moment. If a node does not exist, the returned object will be empty.
+
+> Nota bene: if preferred, you may also extend GunDB with a method which returns the payload of a node given by its context, as shown [below](https://github.com/rozek/notes-on-gundb#contents)
+
 ### Following Links ###
 
 ### Working with Value Properties
@@ -277,6 +300,14 @@ Usage:
 ```
   const Contents = await Gun.get('an/existing/node').Contents()
 ```
+
+Upon completion
+
+* `Contents._` will contain the metadata for the given node,
+* `Contents._.#` its "soul", and
+* `Contents._.>` the timestamps of all actual data properties.
+
+All other properties of `Content` will contain the currently known values and links of the node.
 
 ### Data ###
 
