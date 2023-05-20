@@ -179,10 +179,10 @@ To drive the illusion further, operations writing nested objects to a given node
 
 ```
   const Context_1 = Gun.get('TestObject')
-    Context_1.put({ nested: {message:'hi!'} })
-  console.log(await PayloadOf(Context_1)) // displays object with link
+    Context_1.put({ nested: {message:'hi!'} })   // writes a nested object
+  console.log(await PayloadOf(Context_1)) // displays an object with a link
 
-  const Context_2 = Gun.get('TestObject/nested') // built autoamtically
+  const Context_2 = Gun.get('TestObject/nested') // built automatically
   console.log(await PayloadOf(Context_2)) // displays "{message:'hi!'}"
 ```
 
