@@ -374,6 +374,12 @@ The contents of the given argument are merged with the already existing contents
 
 ## Persistence ##
 
+## Relay Peers ##
+
+(sometimes also called "GunDB Server")
+
+### Running a Relay on an Oracle "Always-free" VM ###
+
 ## Extending the GunDB API ##
 
 GunDB provides an official mechanism to extend its API: by adding properties to `GUN.chain` (where `GUN` is the constructor function, not a GunDB instance) new functions can be injected which can then be called like any other method of a GunDB context:
