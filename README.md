@@ -149,7 +149,7 @@ Context objects have the following structure (only the most important properties
 }
 ```
 
-When concatenating method calls in a **chain**, some methods depend on the context returned from the previous call, some don't - the [Wiki](https://github.com/amark/gun/wiki/Chaining-(v0.3.x)) contains a table which shows the various dependencies.
+When concatenating method calls in a **chain**, some methods depend on the context returned from the previous call, some don't - the [Wiki](https://github.com/amark/gun/wiki/Chaining-(v0.3.x)) contains a table which shows the individual dependencies.
 
 ## Paths ##
 
