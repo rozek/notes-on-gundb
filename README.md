@@ -212,7 +212,7 @@ As mentioned above, nodes may be addressed using the [get](https://github.com/am
 * node ids of the form `~xxx` work fine unless the character sequence following the `~` looks like a public key and the client has not been authenticated using a key pair containing that public key: in such a case an error _object_ with the error message "Unverified data." is logged(!) (rather than throwing an exception)
 * there does not seem to be an explicit limit for node ids (I tried 10k long ids which worked)
 
-> **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any tracebacks **
+> **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any tracebacks**
 
 ### Reading Nodes ###
 
