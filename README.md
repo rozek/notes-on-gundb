@@ -57,7 +57,9 @@ Nevertheless, a network outage may always disconnect some peers from the rest of
 
 ### Eventual Consistence ###
 
-Principally, the clients of a graph database never know if the data they received so far is complete and up-to-date - there could always remain one last peer which stores the final bit of information to make the image complete, but which has unfortunately been disconnected from the rest of the network for a while. By design, graph databases can only guarantee that their contents become **eventually consistent**, i.e., that they synchronize as soon as disconnected peers get connected again.
+Principally, the clients of a graph database never know if the data they received so far is complete and up-to-date - there could always remain one last peer which stores the final bit of information to make the image complete, but which has unfortunately been disconnected from the rest of the network until now.
+
+By design, graph databases can only guarantee that their contents become **eventually consistent**, i.e., that they synchronize as soon as disconnected peers get connected again.
 
 As a consequence, the clients of a graph database should always listen to (and react on) incoming changes of the nodes they have requested before. Graph databases are **dynamic databases**.
 
