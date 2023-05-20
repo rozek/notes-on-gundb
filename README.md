@@ -132,7 +132,7 @@ GunDB's **fluent API** is based on the concept of contexts: many methods (such a
 
 It is important to understand that the node(s) represented by a given context do not have to exist in the database - if necessary, they will be created as soon as some data is written to them.
 
-`Gun` itself represents the root node, `Gun.get(soul)` a node with the given soul, and `context.get(key)` a node with the given key relative to the given context (see section [Paths](https://github.com/rozek/notes-on-gundb#pathse) for an explanation how the actual node soul is built).
+`Gun` itself represents the root node, `Gun.get(soul)` a node with the given soul, and `context.get(subpath)` a node with the given subpath relative to the given context (see section [Paths](https://github.com/rozek/notes-on-gundb#pathse) for an explanation how the actual node soul is built).
 
 Context objects have the following structure (only the most important properties will be shown):
 
