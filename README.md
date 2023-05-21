@@ -548,7 +548,38 @@ The [wiki](https://github.com/amark/gun/wiki/SEA) gives an example where a user'
 
 ### Asymmetric Encryption ###
 
-(t.b.w, see also [PGP](https://en.wikipedia.org/wiki/Pretty_Good_Privacy)-like encryption for multiple users in the [Wiki](https://github.com/amark/gun/wiki/Snippets))
+While a "symmetric" encryption requires the same cipher to be known both on the encrypting and the decrypting side (and allows anybody with access to that cipher to encrypt and decrypt at will), "asymmetric" encryption does not: here, a message is encrypted with the sender's _private_ and the receiver's _public_ key and decrypted with the sender's _public_ and the receiver's _private_ key - effectively limiting communication to the given sender and receiver.
+
+`SEA.secret` can be used for that purpose as it derives a (symmetric) encryption/decryption key from a given public and private key belonging to different participants
+
+```
+  let Alice = await SEA.pair()
+  let Bob   = await SEA.pair()
+
+/**** from Alice to Bob - only ****/
+
+  let originalText  = 'Lorem ipsum dolor sit amet'
+  let encryptedText = await SEA.encrypt(originalText, await SEA.secret(Bob.epub, Alice))
+  let decryptedText = await SEA.decrypt(encryptedText,await SEA.secret(Alice.epub, Bob))
+
+  console.log('originalText ',originalText)
+  console.log('encryptedText',encryptedText)
+  console.log('decryptedText',decryptedText)
+  console.log(originalText === decryptedText)
+```
+
+If a message shall be published once for multiple users with different key pairs, an approach can be used that has formerly be introduced by [Pretty Good Privacy](https://en.wikipedia.org/wiki/Pretty_Good_Privacy):
+
+* create an arbitrary (meaningfully random) encryption key and (symmetrically) encrypt your message with it
+* now asymmetrically encrypt the encryption key itself for every intended receiver
+* then publish both the encrypted message and all encrypted encryption keys
+
+The receivers now either have to
+
+* decrypt the encryption key made for them personally or
+* simple try to decrypt all given encryption keys until they succeed
+
+before they can actually decrypt the message itself. The [Wiki](https://github.com/amark/gun/wiki/Snippets) contains an example for this use case.
 
 ### Certificates ###
 
