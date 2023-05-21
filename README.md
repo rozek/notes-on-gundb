@@ -389,7 +389,24 @@ The contents of the given argument are merged with the already existing contents
 
 ## SEA - Security, Encryption and Authorization ##
 
-(t.b.w, see [SEA](https://github.com/amark/gun/wiki/SEA), [Security](https://github.com/amark/gun/wiki/Security), [Key Concepts](https://github.com/amark/gun/wiki/Security,-Authentication,-Authorization))
+[SEA](https://github.com/amark/gun/wiki/SEA) is used to implement GunDB's [security model](https://github.com/amark/gun/wiki/Security) (see [Wiki](https://github.com/amark/gun/wiki/Security,-Authentication,-Authorization)). It has to be loaded separately
+
+```
+<script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+```
+
+and may then be used to generate cryptographic key pairs, encrypt and sign data or create [certificates](https://github.com/amark/gun/wiki/SEA.certify). SEA works asynchronously, if you want to wait for results you should therefore wrap your code in an asynchronous IIFE
+
+```
+<script>
+  const SEA = GUN.SEA
+  
+  ;(async () => {
+    ...
+  })()
+</script>
+```
 
 ### Keypair Generation ###
 
