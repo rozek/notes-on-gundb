@@ -7,7 +7,7 @@ a (growing) collection of notes on GunDB
 
 [GunDB](https://github.com/amark/gun) is a decentralized (peer-to-peer) distributed [graph database](https://en.wikipedia.org/wiki/Graph_database) with support for multiple users, access control and persistence. It runs in the browser or on [Node.js](https://nodejs.org/en), works fine when offline and synchronizes with other peers using a "last-write-wins" strategy when online.
 
-While GunDB itself may be brilliant in many aspects, the docs are a complete nightmare (hard to read, chaotic, incomplete, wrong). This repository therefore contains a collection of the author's notes on GunDB written while he tries to learn and use it.
+While GunDB itself may be brilliant in many aspects, the docs are a complete nightmare (hard to read, chaotic, incomplete, wrong). This repository therefore contains a collection of the author's notes on GunDB written (from the viewpoint of an application developer) while he tries to learn and use it.
 
 In the end, these notes will hopefully be more systematic than the official docs or the GunDB wiki.
 
@@ -465,7 +465,7 @@ The contents of the given argument are merged with the already existing contents
 
 ## Persistence ##
 
-(t.b.w, see [Building Modules 1](https://github.com/amark/gun/wiki/Building-Modules-for-Gun-(v0.5.x)), [Building Modules 2](https://github.com/amark/gun/wiki/Building-Modules-for-Gun), [RAD](https://github.com/amark/gun/wiki/RAD) and [Radisk](https://github.com/amark/gun/wiki/Radisk) seem to be completely broken and [will be repalced soon](https://github.com/amark/gun/issues/1329#issuecomment-1556079655))
+(t.b.w, see [Building Modules 1](https://github.com/amark/gun/wiki/Building-Modules-for-Gun-(v0.5.x)), [Building Modules 2](https://github.com/amark/gun/wiki/Building-Modules-for-Gun), [RAD](https://github.com/amark/gun/wiki/RAD) and [Radisk](https://github.com/amark/gun/wiki/Radisk) seem to be completely broken and [will be replaced soon](https://github.com/amark/gun/issues/1329#issuecomment-1556079655))
 ([official storage engines](https://github.com/amark/gun/wiki/Storage))
 
 ## Relay Peers ##
@@ -475,6 +475,8 @@ The contents of the given argument are merged with the already existing contents
 ### Running a Relay on an Oracle "Always-free" VM ###
 
 (t.b.w, see [Wiki](https://github.com/amark/gun/wiki/gun-relay-manual-setting-up-(cert---ssl---container---oracle-cloud)))
+
+## Hooking into GunDB ##
 
 ## Extending the GunDB API ##
 
