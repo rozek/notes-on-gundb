@@ -410,7 +410,25 @@ and may then be used to generate cryptographic key pairs, encrypt and sign data 
 
 ### Keypair Generation ###
 
-(t.b.w)
+`SEA.pair` generates two new pairs of cryptographic keys
+
+```
+  let KeyPair = await SEA.pair()
+  console.log('KeyPair',KeyPair)
+```
+
+It returns an object with the following properties:
+
+```
+{
+  epriv: 'DArC...CW5c',             // 43 char.s
+  epub:  'smJU...0jeI.wSCl...HpG0', // 87 char.s
+  priv:  '"grPs...phao"',           // 43 char.s
+  pub:   '9Su...ho1A.GU--...l0Wo',  // 87 char.s
+}
+```
+
+`epriv` and `priv` are the private parts of a key pair and should be kept safe and not shared, `epub` and `pub` are their public counterparts and may safely be published (in fact, they often have to be published)
 
 ### Symmetric Encryption ###
 
