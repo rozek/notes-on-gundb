@@ -507,10 +507,22 @@ If transmitted "untampered" `SEA.verify` will extract the original message from 
 In order to put some computational burden on a client (e.g., to prevent flooding a database or hamper brute force attacks on passwords), a "proof-of-work" can be requested
 
 ```
+  let Text = 'Lorem ipsum dolor sit amet' // could be a password
   let Salt = Math.random()
 
-  let Proof = await SEA.work('Lorem ipsum dolor sit amet',Salt)
+  let Proof = await SEA.work(Text,Salt)
   console.log('Proof',Proof)
+  
+  console.log('same text', 
+    Proof === await SEA.work('Lorem ipsum dolor sit amet',Salt) 
+    ? 'matches' 
+    : 'differs'
+  )
+  console.log('other text',
+    Proof === await SEA.work('lorem ipsum dolor sit amet',Salt) 
+    ? 'matches' 
+    : 'differs'
+  )
 ```
 
 This computes a hash value for the given text using the given `Salt` value. `Salt` should be random (in order to prevent hackers from pre-computing hash values for multiple passwords) but does not have to be kept very secret.
