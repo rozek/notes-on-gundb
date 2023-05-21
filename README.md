@@ -19,7 +19,7 @@ Just as a hint: you can see an outline of these notes and directly navigate to a
 
 ## Keeping up with these Notes ##
 
-This work is currently in progress and new stuff is changed or added in a chaotic manner whenever time permits. If you already read an earlier version of these notes and would simply like to see what changed, the following approach is recommended:
+These notes are being worked on very intensively at the moment and existing text is changed or new text added in a chaotic manner whenever time permits. If you already read an earlier version of these notes and would simply like to see what changed, the following approach is recommended:
 
 * fork this repository and read the forked version
 * whenever you come back later and want to see if there are any changes and _what_ has changed, do the following:
