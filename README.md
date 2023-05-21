@@ -408,6 +408,12 @@ and may then be used to generate cryptographic key pairs, encrypt and sign data 
 </script>
 ```
 
+By default, SEA methods do not throw any exceptions but simply return `undefined` if they encounter any failures. If you want SEA to throw, you have to explicitly configure
+
+```
+  SEA.throw = true
+```
+
 ### Keypair Generation ###
 
 `SEA.pair` generates two new pairs of cryptographic keys
@@ -432,7 +438,39 @@ It returns an object with the following properties:
 
 ### Symmetric Encryption ###
 
-(t.b.w)
+`SEA.encrypt` can be used to encrypt a given text, and `SEA.decrypt` to decrypt it again. Both methods require a cipher in form of a literal passphrase but also accept a key pair generated with `SEA.pair` from which they then take the `epriv` part
+
+```
+  let originalText  = 'Lorem ipsum dolor sit amet'
+  let encryptedText = await SEA.encrypt(originalText, 't0ps3cr3t!')
+  let decryptedText = await SEA.decrypt(encryptedText,'t0ps3cr3t!')
+
+  console.log('originalText ',originalText)
+  console.log('encryptedText',encryptedText)
+  console.log('decryptedText',decryptedText)
+  console.log(originalText === decryptedText)
+```
+
+And now with a key pair
+
+```
+  let KeyPair = await SEA.pair()
+
+  let originalText  = 'Lorem ipsum dolor sit amet'
+  let encryptedText = await SEA.encrypt(originalText, KeyPair)
+  let decryptedText = await SEA.decrypt(encryptedText,KeyPair)
+
+  console.log('originalText ',originalText)
+  console.log('encryptedText',encryptedText)
+  console.log('decryptedText',decryptedText)
+  console.log(originalText === decryptedText)
+```
+
+Encrpyted text is a string of the form
+
+`'SEA{"ct":"YK0o...p6Lp","iv":"6vYQWNafgnDxfN6SJtQa","s":"URgUSMPvEWj0"}'`
+
+and can directly be written into a node property.
 
 ### Signing ###
 
