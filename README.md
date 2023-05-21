@@ -474,7 +474,7 @@ and can directly be written into a node property.
 
 ### Signing ###
 
-In order to verify the origin of a given message, that text can be signed using `SEA.sign` and verified with `SEA.verify`
+In order to verify the origin of a given message, that text can be signed with `SEA.sign` (using the private part of a key pair) and verified with `SEA.verify` (using the public part of a key pair): The receiver of a signed message must therefore know the public key of its originator
 
 ```
   let KeyPair = await SEA.pair()
@@ -504,7 +504,20 @@ If transmitted "untampered" `SEA.verify` will extract the original message from 
 
 ### Proof-of-Work ###
 
-(t.b.w)
+In order to put some computational burden on a client (e.g., to prevent flooding a database or hamper brute force attacks on passwords), a "proof-of-work" can be requested
+
+```
+  let Salt = Math.random()
+
+  let Proof = await SEA.work('Lorem ipsum dolor sit amet',Salt)
+  console.log('Proof',Proof)
+```
+
+This computes a hash value for the given text using the given `Salt` value. `Salt` should be random (in order to prevent hackers from pre-computing hash values for multiple passwords) but does not have to be kept very secret.
+
+A common use case for "proof-of-work" is the password-based authentication of users: instead of storing the passwords themselves (as they could get compromised if an attacker would get access to the password database) their proof-of-work hash should be stored (since attackers would now have to run compute-intensive brute force attacks on every single password - individually, if every password's `salt` differs from any other). Upon login, the given password is hashed again (with the same `Salt` as before) and compared to the stored one: if equal, access is granted, otherwise rejected.
+
+(t.b.w, available Options)
 
 ### Asymmetric Encryption ###
 
