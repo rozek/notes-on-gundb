@@ -465,7 +465,7 @@ The contents of the given argument are merged with the already existing contents
 
 ## Persistence ##
 
-(t.b.w, see [Building Modules 1](https://github.com/amark/gun/wiki/Building-Modules-for-Gun-(v0.5.x)), [Building Modules 2](https://github.com/amark/gun/wiki/Building-Modules-for-Gun), [RAD](https://github.com/amark/gun/wiki/RAD) and [Radisk](https://github.com/amark/gun/wiki/Radisk) seem to be completely broken - they lock my browser)
+(t.b.w, see [Building Modules 1](https://github.com/amark/gun/wiki/Building-Modules-for-Gun-(v0.5.x)), [Building Modules 2](https://github.com/amark/gun/wiki/Building-Modules-for-Gun), [RAD](https://github.com/amark/gun/wiki/RAD) and [Radisk](https://github.com/amark/gun/wiki/Radisk) seem to be completely broken and [will be repalced soon](https://github.com/amark/gun/issues/1329#issuecomment-1556079655))
 ([official storage engines](https://github.com/amark/gun/wiki/Storage))
 
 ## Relay Peers ##
