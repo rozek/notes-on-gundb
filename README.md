@@ -500,7 +500,7 @@ GunDB provides an [official mechanism](https://github.com/amark/gun/wiki/Adding-
 
 ## Potential Extensions of the GunDB API ##
 
-Here are the methods the author has added to GunDB
+Here are some methods the author has added to his GunDB instances
 
 ### GUN.ValueIsPlain ###
 
@@ -697,6 +697,53 @@ Usage:
 ```
 
 > Nota bene: conceptionally, this function is a _static_ method of the "class" `GUN` - but for the sake of simplicity (and to reduce the number of potential typos) it may also be applied to a GunDB _context_
+
+## Utilities ##
+
+The following methods have been used by the author during his evaluation of GunDB
+
+### writeTestObject ###
+
+```
+  const TestObject = {
+    'null':    null,
+    'boolean': true,
+    'number':  1.23,
+    'string':  'Hi',
+    'link':    { '#':'id-of-another-node' },
+    'object':  { 'null':null, 'boolean':false, 'number':1.23, 'string':'Hi', 'object':{} },
+  }
+
+  function writeTestObject (Context) {
+    Context.put(TestObject)
+  }
+```
+
+### writeNestedObjects ###
+
+writes a lot of nested objects into a given base node (`Base` "inner" nodes with the ids `0`...`Base-1` per "outer" node, `Depth` levels deep)
+
+```
+  function writeNestedObjects (Context, BaseKey, Base, Depth) {
+    for (let i = 0; i < Base; i++) {
+      const currentKey     = (BaseKey === '' ? '' : BaseKey + '/') + i
+      const currentContext = Context.get(''+i)
+
+      currentContext.put({ value:currentKey })
+
+      if (Depth > 1) { writeNestedObjects(currentContext,currentContext,Depth-1) }
+    }
+  }
+```
+
+Here is how the number of written nodes (aka `EntryCount`) can be calculated:
+
+```
+  let EntryCount = 0, Base = 10
+  for (let i = 1; i <= Depth; i++) {
+    EntryCount += Base ** i
+  }
+```
 
 ----
 
