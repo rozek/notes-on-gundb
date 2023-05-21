@@ -527,9 +527,24 @@ In order to put some computational burden on a client (e.g., to prevent flooding
 
 This computes a hash value for the given text using the given `Salt` value. `Salt` should be random (in order to prevent hackers from pre-computing hash values for multiple passwords) but does not have to be kept very secret.
 
-A common use case for "proof-of-work" is the password-based authentication of users: instead of storing the passwords themselves (as they could get compromised if an attacker would get access to the password database) their proof-of-work hash should be stored (since attackers would now have to run compute-intensive brute force attacks on every single password - individually, if every password's `salt` differs from any other). Upon login, the given password is hashed again (with the same `Salt` as before) and compared to the stored one: if equal, access is granted, otherwise rejected.
+A common use case for "proof-of-work" is the password-based authentication of users: instead of storing the passwords themselves (as they could become compromised if an attacker would get access to the password database) their proof-of-work hash should be stored (since attackers would now have to run compute-intensive brute force attacks on every single password - individually, if every password's `Salt` differs from any other). Upon login, the given password is hashed again (with the same `Salt` as before) and compared to the stored one: if equal, access is granted, otherwise rejected.
 
-(t.b.w, available Options)
+`SEA.work` has the signature `SEA.work(data, salt, callback, options)` and can be configured in multiple ways by providing an object with `options`:
+
+```
+  const options = {
+    name:'PBKDF2', // or 'SHA-256'
+    encode:'base64', // or 'utf8', 'hex'
+    iterations:10000, // number of iterations
+    salt:..., // salt value to use
+    hash:..., // hash method to use
+    length:... // ?
+  }
+```
+
+Since the result of running `SEA.work` is a cryptographic hash (and looks like a really random number), it can also be used for other purposes where such a number should be deterministically derived from some input - but with some computational burden in order to limit the number of brute force attacks per second.
+
+The [wiki](https://github.com/amark/gun/wiki/SEA) gives an example where a user's password is encrypted using a "proof-of-work" built from the answers of two security questions (which only the password owner should know). The encrypted password is then stored and decrypted upon request when the same security questions are correctly answered again.
 
 ### Asymmetric Encryption ###
 
