@@ -700,7 +700,7 @@ Usage:
 
 ## Utilities ##
 
-The following methods have been used by the author during his evaluation of GunDB
+The following methods have been used by the author during his evaluation of GunDB (note: these are not added to `GUN.chain`!)
 
 ### writeTestObject ###
 
@@ -731,7 +731,9 @@ writes a lot of nested objects into a given base node (`Base` "inner" nodes with
 
       currentContext.put({ value:currentKey })
 
-      if (Depth > 1) { writeNestedObjects(currentContext,currentContext,Base,Depth-1) }
+      if (Depth > 1) {
+        writeNestedObjects(currentContext,currentContext,Base,Depth-1)
+      }
     }
   }
 ```
