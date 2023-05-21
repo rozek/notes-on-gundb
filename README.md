@@ -19,7 +19,7 @@ Just as a hint: you can see an outline of these notes and directly navigate to a
 
 ## GunDB Documentation and Chat ##
 
-**Do not use `https://gun.eco/docs` - use the [GunDB wiki](https://github.com/amark/gun/wiki) instead, it's much better**. The descriptions in this collection will therefore refer to the wiki rather than to the "official" docs.
+**Do not use `https://gun.eco/docs` - use the [GunDB wiki](https://github.com/amark/gun/wiki) instead, it's much better** (albeit even more chaotic). The descriptions in this collection will therefore refer to the wiki rather than to the "official" docs.
 
 If you have questions and don't find any answers in the docs, the wiki or these notes, you may try joining the [chat on GunDB](https://app.gitter.im/#/room/#amark_gun:gitter.im). 
 
@@ -57,7 +57,7 @@ Similarly, peers that have expressed interest in certain nodes obviously (tempor
 
 While connected, any changes made by any peer are immediately reported to any other peer which needs this data.
 
-Nevertheless, a network outage may always disconnect some peers from the rest of a GunDB database - this is called **network partitioning**. While GunDB in itself remains usable, remote data may not be requested, remote changes not observed and local changes not propagated to other peers - the so called **split brain problem**. However, as soon as the network becomes operational again, all changes may be delivered and the nodes held by individual peers **synchronized** with the rest of the database. As long as the delayed reported changes do not affect the same properties of the same nodes, synchronization remains simple - in case of a **conflict**, however, GunDB uses some **metadata** for the affected properties stored along in the same nodes to implement a **last-write-wins** strategy, where later changes overwrite former ones (see [Wiki](https://github.com/amark/gun/wiki/Conflict-Resolution-with-Guns)).
+Nevertheless, a network outage may always disconnect some peers from the rest of a GunDB database - this is called **network partitioning**. While GunDB in itself remains usable, remote data may not be requested, remote changes not observed and local changes not propagated to other peers - the so called **split brain problem**. However, as soon as the network becomes operational again, all changes may be delivered and the nodes held by individual peers **synchronized** with the rest of the database. As long as the delayed reported changes do not affect the same properties of the same nodes, synchronization remains simple - in case of a **conflict**, however, GunDB uses some **metadata** for the affected properties stored along in the same nodes to implement a **last-write-wins** strategy, where later changes overwrite former ones (see [Conflict Resolution](https://github.com/amark/gun/wiki/Conflict-Resolution-with-Guns), [CRDT](https://github.com/amark/gun/wiki/CRDT) and [HAM](https://github.com/amark/gun/wiki/Hypothetical-Amnesia-Machine-(HAM)) in the Wiki).
 
 ### Eventual Consistence ###
 
@@ -69,7 +69,7 @@ As a consequence, the clients of a graph database should always listen to (and r
 
 ### Data Removal ###
 
-By design, nodes and their contents cannot easily be deleted - there could always be another node that did not receive the deletion report but still holds a copy of the outdated node and sends it back to the database again. Instead, old nodes and properties have to be **nulled out** in order to be marked as **garbage**. This operation creates a **tombstone** which is kept in the database and eventually overwrites the original data in every peer. If it becomes necessary to actually get rid of no longer wanted nodes, some kind of **distributed garbage collection** has to be implemented on top of the graph database - GunDB does not (yet) provide such a DGC.
+By design, nodes and their contents cannot easily be deleted - there could always be another node that did not receive the deletion report but still holds a copy of the outdated node and sends it back to the database again. Instead, old nodes and properties have to be **nulled out** in order to be marked as **garbage**. This operation creates a **tombstone** which is kept in the database and eventually overwrites the original data in every peer. If it becomes necessary to actually get rid of no longer wanted nodes, some kind of **distributed garbage collection** has to be implemented on top of the graph database - GunDB does not (yet) provide such a DGC (see [Wiki](https://github.com/amark/gun/wiki/Delete)).
 
 ### Scalability ###
 
@@ -99,7 +99,7 @@ Business data rarely fits directly to a GunDB node as the contents of such a nod
 
 ### Data Modelling ###
 
-A graph database contains nodes and links. Each node is individually addressable and has to be fetched separately - this should be taken into account when designing the mapping between business data and GunDB nodes. Items of business objects which always belong to these objects should probably be better kept within "their" object (unless size constraints enforce a separate node). On the other hand, items used in multiple places of a business application can naturally be stored in an own node.
+A graph database contains nodes and links. Each node is individually addressable and has to be fetched separately - this should be taken into account when designing the mapping between business data and GunDB nodes. Items of business objects which always belong to these objects should probably be better kept within "their" object (unless size constraints enforce a separate node). On the other hand, items used in multiple places of a business application can naturally be stored in an own node (see [Wiki](https://github.com/amark/gun/wiki/Design-Examples) for an example).
 
 ## Preparational Steps ##
 
@@ -243,6 +243,10 @@ If a node exists, the object returned from `once` will contain a property `_` (w
 
 > Nota bene: if preferred, you may also extend GunDB with a method which returns the actual payload of a node given by its context, as shown [below](https://github.com/rozek/notes-on-gundb#contextdata)
 
+### Fetching multiple Nodes at once ###
+
+(t.b.w, see section on LEX in the wiki page about [RAD](https://github.com/amark/gun/wiki/RAD) and the [LEX rules](https://github.com/amark/gun/wiki/Strings,-Keys-and-Lex-Rules))
+
 ### Following Links ###
 
 If a property of a given node looks like a link (i.e., it is an object with the single property `#` which contains a string), then the (always absolute) id of the link target may be extracted and used as an argument for `Gun.get()` in order to address the target node.
@@ -352,6 +356,14 @@ The contents of the given argument are merged with the already existing contents
 
 (t.b.w, see [on](https://github.com/amark/gun/wiki/API-(v0.3.x)#on) and [map](https://github.com/amark/gun/wiki/API-(v0.3.x)#map))
 
+## Built-in Data Structures ##
+
+### Unordered Sets ###
+
+### Time Graphs ###
+
+(see [Wiki](https://github.com/amark/gun/wiki/Timegraph))
+
 ## SEA - Security, Encryption and Authorization ##
 
 (t.b.w, see [SEA](https://github.com/amark/gun/wiki/SEA), [Security](https://github.com/amark/gun/wiki/Security), [Key Concepts](https://github.com/amark/gun/wiki/Security,-Authentication,-Authorization))
@@ -366,13 +378,20 @@ The contents of the given argument are merged with the already existing contents
 
 ### Asymmetric Encryption ###
 
+(t.b.w, see also [PGP](https://en.wikipedia.org/wiki/Pretty_Good_Privacy)-like encryption for multiple users in the [Wiki](https://github.com/amark/gun/wiki/Snippets))
+
 ### Certificates ###
 
 (t.b.w, see [Wiki](https://github.com/amark/gun/wiki/SEA.certify))
 
 ## User Handling ##
 
-(GunDB provides some cryptographic protection for users, users do not have to be human beings)
+(t.b.w, GunDB provides some cryptographic protection for users, users do not have to be human beings)
+(see [Wiki](https://github.com/amark/gun/wiki/User))
+
+### Public Space vs. User Space ###
+
+(t.b.w, see [Wiki](https://github.com/amark/gun/wiki/Introduction))
 
 ### Creating a new User ###
 
@@ -396,13 +415,16 @@ The contents of the given argument are merged with the already existing contents
 
 ## Persistence ##
 
-(t.b.w, see [Building Modules 1](https://github.com/amark/gun/wiki/Building-Modules-for-Gun-(v0.5.x)), [Building Modules 2](https://github.com/amark/gun/wiki/Building-Modules-for-Gun))
+(t.b.w, see [Building Modules 1](https://github.com/amark/gun/wiki/Building-Modules-for-Gun-(v0.5.x)), [Building Modules 2](https://github.com/amark/gun/wiki/Building-Modules-for-Gun), [RAD](https://github.com/amark/gun/wiki/RAD) and [Radisk](https://github.com/amark/gun/wiki/Radisk) seem to be completely broken - they lock my browser)
+([official storage engines](https://github.com/amark/gun/wiki/Storage))
 
 ## Relay Peers ##
 
-(sometimes also called "GunDB Server")
+(t.b.w, sometimes also called "GunDB Server", see [Wiki](https://github.com/amark/gun/wiki/Local-Desktop-Gun-Relay-(Windows,-Linux,-MAC)) for setup, or [here](https://github.com/amark/gun/wiki/Server-with-basic-example-(gun-in-action)) for own development)
 
 ### Running a Relay on an Oracle "Always-free" VM ###
+
+(see [Wiki](https://github.com/amark/gun/wiki/gun-relay-manual-setting-up-(cert---ssl---container---oracle-cloud)))
 
 ## Extending the GunDB API ##
 
