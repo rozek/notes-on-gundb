@@ -9,9 +9,9 @@ a (growing) collection of notes on GunDB
 
 While GunDB itself may be brilliant in many aspects, the docs are a complete nightmare (hard to read, chaotic, incomplete, wrong). This repository therefore contains a collection of the author's notes on GunDB written while he tries to learn and use it.
 
-In the end, these notes will hopefully be less chaotic than the official docs or the GunDB wiki.
+In the end, these notes will hopefully be more systematic than the official docs or the GunDB wiki.
 
-> feel free to [open an issue](https://github.com/rozek/notes-on-gundb/issues) if you find errors in my descriptions
+> feel free to [open an issue](https://github.com/rozek/notes-on-gundb/issues) if you find errors in my notes
 
 ## Table of Contents ##
 
@@ -57,7 +57,7 @@ Similarly, peers that have expressed interest in certain nodes obviously (tempor
 
 While connected, any changes made by any peer are immediately reported to any other peer which needs this data.
 
-Nevertheless, a network outage may always disconnect some peers from the rest of a GunDB database - this is called **network partitioning**. While GunDB in itself remains usable, remote data may not be requested, remote changes not observed and local changes not propagated to other peers - the so called **split brain problem**. However, as soon as the network becomes operational again, all changes may be delivered and the nodes held by individual peers **synchronized** with the rest of the database. As long as the delayed reported changes do not affect the same properties of the same nodes, synchronization remains simple - in case of a **conflict**, however, GunDB uses some **metadata** for the affected properties stored along in the same nodes to implement a **last-write-wins** strategy, where later changes overwrite former ones (see [Conflict Resolution](https://github.com/amark/gun/wiki/Conflict-Resolution-with-Guns), [CRDT](https://github.com/amark/gun/wiki/CRDT) and [HAM](https://github.com/amark/gun/wiki/Hypothetical-Amnesia-Machine-(HAM)) in the Wiki).
+Nevertheless, a network outage may always disconnect some peers from the rest of a GunDB database - this is called **network partitioning**. While GunDB in itself remains usable, remote data may not be requested, remote changes not observed and local changes not propagated to other peers - the so called **split brain problem**. However, as soon as the network becomes operational again, all changes may be delivered and the nodes held by individual peers **synchronized** with the rest of the database. As long as the delayed reported changes do not affect the same properties of the same nodes, synchronization remains simple - in case of a **conflict**, however, GunDB uses some **metadata** for the affected properties stored along in the same nodes to implement a **last-write-wins** strategy, where later changes overwrite former ones (see also the WIki pages on [Conflict Resolution](https://github.com/amark/gun/wiki/Conflict-Resolution-with-Guns), [CRDT](https://github.com/amark/gun/wiki/CRDT) and [HAM](https://github.com/amark/gun/wiki/Hypothetical-Amnesia-Machine-(HAM))).
 
 ### Eventual Consistence ###
 
@@ -245,7 +245,7 @@ If a node exists, the object returned from `once` will contain a property `_` (w
 
 ### Fetching multiple Nodes at once ###
 
-(t.b.w, see section on LEX in the wiki page about [RAD](https://github.com/amark/gun/wiki/RAD) and the [LEX rules](https://github.com/amark/gun/wiki/Strings,-Keys-and-Lex-Rules))
+(t.b.w, see section on LEX in the wiki page about [RAD](https://github.com/amark/gun/wiki/RAD) and the [LEX rules](https://github.com/amark/gun/wiki/Strings,-Keys-and-Lex-Rules), Pagination)
 
 ### Following Links ###
 
@@ -360,9 +360,11 @@ The contents of the given argument are merged with the already existing contents
 
 ### Unordered Sets ###
 
+(t.b.w, see [Wiki](https://github.com/amark/gun/wiki/API-(v0.3.x)#set))
+
 ### Time Graphs ###
 
-(see [Wiki](https://github.com/amark/gun/wiki/Timegraph))
+(t.b.w, see [Wiki](https://github.com/amark/gun/wiki/Timegraph))
 
 ## SEA - Security, Encryption and Authorization ##
 
@@ -370,11 +372,19 @@ The contents of the given argument are merged with the already existing contents
 
 ### Keypair Generation ###
 
+(t.b.w)
+
 ### Symmetric Encryption ###
+
+(t.b.w)
 
 ### Signing ###
 
+(t.b.w)
+
 ### Proof-of-Work ###
+
+(t.b.w)
 
 ### Asymmetric Encryption ###
 
@@ -395,13 +405,26 @@ The contents of the given argument are merged with the already existing contents
 
 ### Creating a new User ###
 
-(just a cryptographic key pair)
+(t.b.w, just a cryptographic key pair)
 
 ### Logging in ###
 
-(Gun.user())
+(t.b.w, Gun.user())
 
 ### Logging out ###
+
+(t.b.w)
+
+[user.leave](https://github.com/amark/gun/wiki/User#userleave) logs a user out - here is how you can wait for success:
+
+```
+  await (async () => {
+    Gun.user().leave()
+    while (Gun.user()._.sea != null) {
+      await waitFor(1)
+    }
+  })()
+```
 
 ### Creating a new User with an Alias ###
 
@@ -409,9 +432,15 @@ The contents of the given argument are merged with the already existing contents
 
 ### Access Control ###
 
+(t.b.w, SEA certificates)
+
 ### Changing a User's Password ###
 
+(t.b.w, Alias only)
+
 ### When a User's Credentials get compromised.. ###
+
+(t.b.w, change password, copy to new user space)
 
 ## Persistence ##
 
@@ -424,7 +453,7 @@ The contents of the given argument are merged with the already existing contents
 
 ### Running a Relay on an Oracle "Always-free" VM ###
 
-(see [Wiki](https://github.com/amark/gun/wiki/gun-relay-manual-setting-up-(cert---ssl---container---oracle-cloud)))
+(t.b.w, see [Wiki](https://github.com/amark/gun/wiki/gun-relay-manual-setting-up-(cert---ssl---container---oracle-cloud)))
 
 ## Extending the GunDB API ##
 
@@ -676,19 +705,6 @@ Additionally, it is perfectly possible for the "key" part of a "soul" to contain
 ## User Handling ##
 
 "[Users](https://github.com/amark/gun/wiki/User)" in GunDB are actually represented by cryptographic key pairs, "aliases" allow users to be created, looked-up and authenticated by name. Nodes with keys of the form `'~' + publicKey` on the outermost level build the foundation of "user spaces". Trying to write into the space of a given user requires a GunDB client to be authenticated as that user (which requires the proper _private_ key for the public one that builds the user space)
-
-### Logging out ###
-
-[user.leave](https://github.com/amark/gun/wiki/User#userleave) logs a user out - here is how you can wait for success:
-
-```
-  await (async () => {
-    Gun.user().leave()
-    while (Gun.user()._.sea != null) {
-      await waitFor(1)
-    }
-  })()
-```
 
 
 
