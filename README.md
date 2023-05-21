@@ -28,7 +28,7 @@ These notes are being worked on very intensively at the moment and existing text
   * back in _your_ repository, click on the link that says "n commits behind" - this will open a list of all changed files
   * locate file "README.md" to see the actual changes (called "diff"): the left side will show you which text has been removed, the right side what has been added
   * either read the changed parts directly in the "diff" itself or
-  * in the original notes: use your browser's "find" command to locate any added text (of which you meaningfully copied unique parts into the clipboard from the diff before) and read it there
+  * in the original notes: use your browser's "find" command to locate any added text (of which you practically copied unique parts into the clipboard from the diff before) and read it there
 
 This procedure should save you a lot of time while still keeping you up-to-date...
 
@@ -570,14 +570,14 @@ While a "symmetric" encryption requires the same cipher to be known both on the 
 
 If a message shall be published once for multiple users with different key pairs, an approach can be used that has formerly be introduced by [Pretty Good Privacy](https://en.wikipedia.org/wiki/Pretty_Good_Privacy):
 
-* create an arbitrary (meaningfully random) encryption key and (symmetrically) encrypt your message with it
+* create an arbitrary (practically random) encryption key and (symmetrically) encrypt your message with it
 * now asymmetrically encrypt the encryption key itself for every intended receiver
 * then publish both the encrypted message and all encrypted encryption keys
 
 The receivers now either have to
 
 * decrypt the encryption key made for them personally or
-* simple try to decrypt all given encryption keys until they succeed
+* simply try to decrypt all given encryption keys until they succeed
 
 before they can actually decrypt the message itself. The [Wiki](https://github.com/amark/gun/wiki/Snippets) contains an example for this use case.
 
