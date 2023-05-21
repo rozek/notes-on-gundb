@@ -434,11 +434,11 @@ It returns an object with the following properties:
 }
 ```
 
-`epriv` and `priv` are the private parts of a key pair and should be kept safe and not shared, `epub` and `pub` are their public counterparts and may safely be published (in fact, they often have to be published)
+`epriv` and `priv` are the private parts of a key pair and should be kept safe and not shared, `epub` and `pub` are their public counterparts and may safely be published (in fact, they often _have_ to be published)
 
 ### Symmetric Encryption ###
 
-`SEA.encrypt` can be used to encrypt a given text, and `SEA.decrypt` to decrypt it again. Both methods require a cipher in form of a literal passphrase but also accept a key pair generated with `SEA.pair` from which they then take the `epriv` part
+`SEA.encrypt` can be used to encrypt a given text, and `SEA.decrypt` to decrypt it again. Both methods require the same cipher in form of a literal passphrase but also accept a key pair generated with `SEA.pair` from which they then take the `epriv` part
 
 ```
   let originalText  = 'Lorem ipsum dolor sit amet'
@@ -474,7 +474,33 @@ and can directly be written into a node property.
 
 ### Signing ###
 
-(t.b.w)
+In order to verify the origin of a given message, that text can be signed using `SEA.sign` and verified with `SEA.verify`
+
+```
+  let KeyPair = await SEA.pair()
+
+  let originalText = 'Lorem ipsum dolor sit amet'
+  let signedText   = await SEA.sign(originalText,KeyPair)
+  let acceptedText = await SEA.verify(signedText,KeyPair.pub)
+
+  console.log('originalText',originalText)
+  console.log('signedText  ',signedText)
+  console.log('acceptedText',acceptedText)
+
+  let brokenText   = signedText.replace(/Lorem/,'lorem')
+  let rejectedText = await SEA.verify(brokenText,KeyPair.pub)
+
+  console.log('brokenText  ',brokenText)
+  console.log('rejectedText',rejectedText) // undefined
+```
+
+Signed text is a string of the form
+
+`SEA{"m":"Lorem ipsum dolor sit amet","s":"LWqj...iw=="}`
+
+and can directly be written into a node property.
+
+If transmitted "untampered" `SEA.verify` will extract the original message from the signed text and return it - otherwise it will simply return `undefined`
 
 ### Proof-of-Work ###
 
