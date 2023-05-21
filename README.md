@@ -57,7 +57,7 @@ Similarly, peers that have expressed interest in certain nodes obviously (tempor
 
 While connected, any changes made by any peer are immediately reported to any other peer which needs this data.
 
-Nevertheless, a network outage may always disconnect some peers from the rest of a GunDB database - this is called **network partitioning**. While GunDB in itself remains usable, remote data may not be requested, remote changes not observed and local changes not propagated to other peers - the so called **split brain problem**. However, as soon as the network becomes operational again, all changes may be delivered and the nodes held by individual peers **synchronized** with the rest of the database. As long as the delayed reported changes do not affect the same properties of the same nodes, synchronization remains simple - in case of a **conflict**, however, GunDB uses some **metadata** for the affected properties stored along in the same nodes to implement a **last-write-wins** strategy, where later changes overwrite former ones.
+Nevertheless, a network outage may always disconnect some peers from the rest of a GunDB database - this is called **network partitioning**. While GunDB in itself remains usable, remote data may not be requested, remote changes not observed and local changes not propagated to other peers - the so called **split brain problem**. However, as soon as the network becomes operational again, all changes may be delivered and the nodes held by individual peers **synchronized** with the rest of the database. As long as the delayed reported changes do not affect the same properties of the same nodes, synchronization remains simple - in case of a **conflict**, however, GunDB uses some **metadata** for the affected properties stored along in the same nodes to implement a **last-write-wins** strategy, where later changes overwrite former ones (see [Wiki](https://github.com/amark/gun/wiki/Conflict-Resolution-with-Guns)).
 
 ### Eventual Consistence ###
 
@@ -128,7 +128,7 @@ The (perhaps) strange looking `async` [IIFE](https://developer.mozilla.org/en-US
 
 ### Running GunDB with Options ###
 
-(t.b.w)
+(t.b.w, see [Wiki](https://github.com/amark/gun/wiki/API-(v0.3.x)))
 
 ## Contexts ##
 
@@ -346,11 +346,15 @@ The contents of the given argument are merged with the already existing contents
 
 ### Waiting for Acknowledgements ###
 
-(put with callback)
+(t.b.w, put with callback, see [Wiki](https://github.com/amark/gun/wiki/API-(v0.3.x)))
 
 ## Observing Nodes ##
 
+(t.b.w, see [on](https://github.com/amark/gun/wiki/API-(v0.3.x)#on) and [map](https://github.com/amark/gun/wiki/API-(v0.3.x)#map))
+
 ## SEA - Security, Encryption and Authorization ##
+
+(t.b.w, see [SEA](https://github.com/amark/gun/wiki/SEA), [Security](https://github.com/amark/gun/wiki/Security), [Key Concepts](https://github.com/amark/gun/wiki/Security,-Authentication,-Authorization))
 
 ### Keypair Generation ###
 
@@ -363,6 +367,8 @@ The contents of the given argument are merged with the already existing contents
 ### Asymmetric Encryption ###
 
 ### Certificates ###
+
+(t.b.w, see [Wiki](https://github.com/amark/gun/wiki/SEA.certify))
 
 ## User Handling ##
 
@@ -389,6 +395,8 @@ The contents of the given argument are merged with the already existing contents
 ### When a User's Credentials get compromised.. ###
 
 ## Persistence ##
+
+(t.b.w, see [Building Modules 1](https://github.com/amark/gun/wiki/Building-Modules-for-Gun-(v0.5.x)), [Building Modules 2](https://github.com/amark/gun/wiki/Building-Modules-for-Gun))
 
 ## Relay Peers ##
 
