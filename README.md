@@ -478,6 +478,8 @@ The contents of the given argument are merged with the already existing contents
 
 ## Hooking into GunDB ##
 
+(t.b.w, also called "module" or "plugin" in the GunDB docs, see [Building Modules for Gun](https://github.com/amark/gun/wiki/Building-Modules-for-Gun), [Building Modules for Gun (v0.5.x)](https://github.com/amark/gun/wiki/Building-Modules-for-Gun-(v0.5.x)), [Building Storage Adapters](https://github.com/amark/gun/wiki/Building-Storage-Adapters))
+
 ## Extending the GunDB API ##
 
 GunDB provides an [official mechanism](https://github.com/amark/gun/wiki/Adding-Methods-to-the-Gun-Chain) to extend its API: by adding properties to `GUN.chain` (where `GUN` is the constructor function, not a GunDB instance) new functions can be injected which can then be called like any other method of a GunDB context:
