@@ -17,6 +17,21 @@ In the end, these notes will hopefully be more systematic than the official docs
 
 Just as a hint: you can see an outline of these notes and directly navigate to a specific section by clicking on the "list" icon left of the "README.md" title above the "notes-on-gundb" header - or at the top of this window in case that you already had to scroll down!
 
+## Keeping on with these Notes ##
+
+This work is currently in progress and new stuff is changed or added in a chaotic manner whenever time permits. If you already read an earlier verson of these notes and would simply like to see what changed, the following approach is recommended:
+
+* fork this repository and read the forked version
+* whenever you want to see if there are any changes and _what_ has changed, do the following:
+  * GitHub will tell you that your fork is several commits behind my original (you'll find that message above the list of files in this repo)
+  * open the [original notes](https://github.com/rozek/notes-on-gundb) in a separate window or tab - here you will actually read any new sections
+  * back in _your_ repository, click on the link that says "n commits behind" - this will open a list of all changed files
+  * locate file "README.md" to see the actual changes (called "diff"): the left side will show you which text has been removed, the right side what has been added
+  * either read the changed parts in the "diff" itself or
+  * in the original notes: use your browser's "find" command to locate any added text (copied into the clipboard from the diff) and read it there
+
+This procedure should save you a lot of time while still keeping you up-to-date...
+
 ## GunDB Documentation and Chat ##
 
 **Do not use `https://gun.eco/docs` - use the [GunDB wiki](https://github.com/amark/gun/wiki) instead, it's much better** (albeit even more chaotic). The descriptions in this collection will therefore refer to the wiki rather than to the "official" docs.
