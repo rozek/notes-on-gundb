@@ -732,7 +732,7 @@ writes a lot of nested objects into a given base node (`Base` "inner" nodes with
       currentContext.put({ value:currentKey })
 
       if (Depth > 1) {
-        writeNestedObjects(currentContext,currentContext,Base,Depth-1)
+        writeNestedObjects(currentContext,currentKey,Base,Depth-1)
       }
     }
   }
