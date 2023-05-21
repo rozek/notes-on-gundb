@@ -181,6 +181,8 @@ The first three variants of `get` finally address the same node (`waitFor` is ex
 
 > As a "rule of thumb" you could expect that the argument of the _first_ `get` method applied to the root node context (i.e., `Gun.get(...)`) may contain slashes and still works as expected - all other `get` calls should avoid arguments with slashes...(yes, the GunDB API is often quite unsystematic)
 
+### Paths of nested Objects ###
+
 To drive the illusion further, operations writing nested objects to a given node automatically create new nodes for the nested objects with souls built from the concatenation of the original node's id and the name of the property with the nested object:
 
 ```
@@ -193,6 +195,10 @@ To drive the illusion further, operations writing nested objects to a given node
 ```
 
 (`PayloadOf` is explained [below](https://github.com/rozek/notes-on-gundb#PayloadOf))
+
+### Taking Advantage of Paths ###
+
+While the ids of individual nodes are as independent as the nodes themselves, common path prefixes may still be used to indicate that nodes with these prefixes semantically belong together. Particularly, such "groups" of nodes may be fetched from GunDB in a single method invocation - and, if there are many of them, the results may even be "paginated" (see [below](https://github.com/rozek/notes-on-gundb#fetching-multiple-nodes-at-once))
 
 ## Working with Nodes and Properties ##
 
