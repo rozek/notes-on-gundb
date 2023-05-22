@@ -930,7 +930,7 @@ The following methods have been used by the author during his evaluation of GunD
 creates a lot of nested nodes starting from a given base node (`Base` "inner" nodes with the ids `0`...`Base-1` per "outer" node, `Depth` levels deep)
 
 ```
-/**** writeNestedNodes - recursively create nested nodes ****/
+/**** writeNestedNodes - recursively creates nested nodes ****/
 
   function writeNestedNodes (Context, BaseKey, Base, Depth) {
     for (let i = 0; i < Base; i++) {
