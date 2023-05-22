@@ -932,7 +932,7 @@ creates a lot of nested nodes starting from a given base node (`Base` "inner" no
 ```
 /**** writeNestedNodes - recursively creates nested nodes ****/
 
-  function writeNestedNodes (Context, BaseKey = '', Base = 10, Depth = 3) {
+  function writeNestedNodes (Context, Base = 10, Depth = 3, BaseKey = '') {
     for (let i = 0; i < Base; i++) {
       const currentKey     = (BaseKey === '' ? '' : BaseKey + '/') + i
       const currentContext = Context.get(''+i)
@@ -940,7 +940,7 @@ creates a lot of nested nodes starting from a given base node (`Base` "inner" no
       currentContext.put({ value:currentKey })
 
       if (Depth > 1) {
-        writeNestedNodes(currentContext,currentKey,Base,Depth-1)
+        writeNestedNodes(currentContext,Base,Depth-1,currentKey)
       }
     }
   }
