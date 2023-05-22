@@ -504,7 +504,7 @@ If transmitted "untampered" `SEA.verify` will extract the original message from 
 
 ### Proof-of-Work ###
 
-In order to put some computational burden on a client (e.g., to prevent flooding a database or hamper brute force attacks on passwords), a "proof-of-work" can be requested
+In order to put some computational burden on a client and delay certain operations (e.g., to prevent flooding a database or hamper brute force attacks on passwords), a "proof-of-work" can be requested
 
 ```
   let Text = 'Lorem ipsum dolor sit amet' // could be a password
