@@ -909,6 +909,8 @@ The following methods have been used by the author during his evaluation of GunD
 ### writeTestObject ###
 
 ```
+/**** writeTestObject - writes a test object into a given node ****/
+
   const TestObject = {
     'null':    null,
     'boolean': true,
@@ -923,12 +925,14 @@ The following methods have been used by the author during his evaluation of GunD
   }
 ```
 
-### writeNestedObjects ###
+### writeNestedNodes ###
 
-writes a lot of nested objects into a given base node (`Base` "inner" nodes with the ids `0`...`Base-1` per "outer" node, `Depth` levels deep)
+creates a lot of nested nodes starting from a given base node (`Base` "inner" nodes with the ids `0`...`Base-1` per "outer" node, `Depth` levels deep)
 
 ```
-  function writeNestedObjects (Context, BaseKey, Base, Depth) {
+/**** writeNestedNodes - recursively create nested nodes ****/
+
+  function writeNestedNodes (Context, BaseKey, Base, Depth) {
     for (let i = 0; i < Base; i++) {
       const currentKey     = (BaseKey === '' ? '' : BaseKey + '/') + i
       const currentContext = Context.get(''+i)
@@ -936,13 +940,13 @@ writes a lot of nested objects into a given base node (`Base` "inner" nodes with
       currentContext.put({ value:currentKey })
 
       if (Depth > 1) {
-        writeNestedObjects(currentContext,currentKey,Base,Depth-1)
+        writeNestedNodes(currentContext,currentKey,Base,Depth-1)
       }
     }
   }
 ```
 
-Here is how the number of written nodes (aka `EntryCount`) can be calculated:
+Here is how the number of created nodes (aka `EntryCount`) can be calculated:
 
 ```
   let EntryCount = 0, Base = 10
