@@ -288,10 +288,10 @@ where `path` is the context path of all nodes which shall be addressed and `key_
 
 * `'='` specifies the exact key of a node
 * `'*'` specifies the first few characters of any node's key (called the "prefix")
-* `'>'` specifies the lexically lowest allowed node key (works )
-* `'<'` specifies the lexically highest allowed node key
-* `'%'` how many bytes may a peer load from storage before completing its response
-* `'-'` should the set of available ids be scanned upwards or downwards? 
+* `'>'` specifies the lexically lowest allowed node key (warning: behaves like "≧")
+* `'<'` specifies the lexically highest allowed node key (warning: behaves like "≦")
+* `'%'` specifies how many bytes a peer may load from storage before completing its current response
+* `'-'` specifies whether the set of available ids should be scanned upwards or downwards?
 
 A few examples should help understanding these properties and their semantics:
 
