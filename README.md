@@ -163,7 +163,7 @@ Context objects have the following structure (only the most important properties
     back.$: ..., // if present, refers to the previous context object
     soul: ...,   // if present, contains the id of the represented node
     link: ...,   // if present, contains the id of the represented node
-    get: ...,    // if present, contains the "key" of the represented node
+    get: ...,    // if present, contains the "key" of this context
     put: ...,    // if present, contains the known contents of the...
                  // ...represented node including any metadata
   }
@@ -172,9 +172,25 @@ Context objects have the following structure (only the most important properties
 
 When concatenating method calls in a **chain**, some methods depend on the context returned from the previous call, some don't - the [Wiki](https://github.com/amark/gun/wiki/Chaining-(v0.3.x)) contains a table which shows the individual dependencies.
 
-## Paths ##
+## Paths and Keys ##
 
-When chaining `get` calls, GunDB usually concatenates the individually given arguments with a slash (`/`) in between to build the id of the final node. The outcome looks not unlike the path names used in file systems and gives the illusion(!) of a "containment tree". However, it is important to understand that there is no such tree: every node is independent of any other - and even nodes with an id like `a/b/c` linking to other nodes with ids of the form `a/b/c/d` (or similar) do not _contain_ the nodes they link to!
+In a chain of `get` calls, the last `get` specifies the context "key" while all previous ones together form the context "path". This distinction is made for internal reasons on one hand and on the other hand because "keys" have both some restrictions concerning their value but also some potential as they may address multiple nodes at once. Thus, in
+
+`Gun.get(path_1).get(path_2).get(key)`
+
+`path_1` and `path_2` together form the final context path while `key` contains the context key.
+
+If there is only a single `get` call
+
+`Gun.get(key)`
+
+the final context's path is empty (`''`).
+
+### Path Concatenation ###
+
+When chaining `get` calls, GunDB concatenates the individually given arguments with a slash (`/`) in between to build the id of the final node. The outcome looks not unlike the path names used in file systems and gives the illusion(!) of a "containment tree". However, it is important to understand that there is no such tree: every node is independent of any other - and even nodes with an id like `a/b/c` linking to other nodes with ids of the form `a/b/c/d` (or similar) do not _contain_ the nodes they link to!
+
+In order to prevent unpleasant surprises, the argument of the final `get` call (i.e., the one defining a context key) should avoid slashes, while all others may very well contain them - unless there is only a single `get`. See the following example for illustration:
 
 ```
   const Context_1 = Gun.get('a').get('b').get('c')
@@ -194,11 +210,9 @@ When chaining `get` calls, GunDB usually concatenates the individually given arg
 
 The first three variants of `get` finally address the same node (`waitFor` is explained [below](https://github.com/rozek/notes-on-gundb#waitfor))
 
-> As a "rule of thumb" you could expect that the argument of the _first_ `get` method applied to the root node context (i.e., `Gun.get(...)`) may contain slashes and still works as expected - all other `get` calls should avoid arguments with slashes...(yes, the GunDB API is often quite unsystematic)
-
 ### Paths of nested Objects ###
 
-To drive the illusion further, operations writing nested objects to a given node automatically create new nodes for the nested objects with souls built from the concatenation of the original node's id and the name of the property with the nested object:
+To drive the illusion of a containment tree further, operations writing nested objects to a given node automatically create new nodes for the nested objects with souls built from the concatenation of the original node's id and the name of the property with the nested object:
 
 ```
   const Context_1 = Gun.get('TestObject')
