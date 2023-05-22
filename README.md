@@ -817,10 +817,17 @@ Usage:
 Retrieves the full contents (i.e., data and metadata) of a node given by its context
 
 ```
-  GUN.chain.Contents = async function () {
+/**** Contents - fetches data and metadata of a given node ****/
+
+  GUN.chain.Contents = async function (Timeout = 100, Default = undefined) {
     return new Promise((resolve,reject) => {
+      const TimerId = setTimeout(() => {
+        resolve(Default)          // the requested node seems not to exist (yet)
+      },Timeout)
+
       this.once((Contents) => {
-        return {...Contents} // "Contents" must not be modified!
+        clearTimeout(TimerId)
+        resolve({...Contents})               // "Contents" must not be modified!
       })
     })
   }
@@ -845,10 +852,18 @@ All other properties of `Content` will contain the currently known values and li
 Retrieves the payload of a node given by its context
 
 ```
-  GUN.chain.Data = async function () {
+/**** Data - fetches the data part of a given node ****/
+
+  GUN.chain.Data = async function (Timeout = 100, Default = undefined) {
     return new Promise((resolve,reject) => {
+      const TimerId = setTimeout(() => {
+        resolve(Default)          // the requested node seems not to exist (yet)
+      },Timeout)
+
       this.once((Contents) => {
-        const Result = {...Contents} // "Contents" must not be modified!
+        clearTimeout(TimerId)
+
+        const Result = {...Contents}         // "Contents" must not be modified!
           delete Result._
         resolve(Result)
       })
@@ -867,10 +882,17 @@ Usage:
 Retrieves the metadata of a node given by its context
 
 ```
-  GUN.chain.Metadata = async function () {
+/**** Metadata - fetches the metadata part of a given node ****/
+
+  GUN.chain.Metadata = async function (Timeout = 100, Default = undefined) {
     return new Promise((resolve,reject) => {
+      const TimerId = setTimeout(() => {
+        resolve(Default)          // the requested node seems not to exist (yet)
+      },Timeout)
+
       this.once((Contents) => {
-        return {...Contents._} // "Contents" must not be modified!
+        clearTimeout(TimerId)
+        resolve({...Contents._})             // "Contents" must not be modified!
       })
     })
   }
