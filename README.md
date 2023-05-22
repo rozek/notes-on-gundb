@@ -174,7 +174,7 @@ When concatenating method calls in a **chain**, some methods depend on the conte
 
 ## Paths and Keys ##
 
-In a chain of `get` calls, the last `get` specifies the context "key" while all previous ones together form the context "path". This distinction is made for internal reasons on one hand and on the other hand because "keys" have both some restrictions concerning their value but also some potential as they may address multiple nodes at once. Thus, in
+In a chain of `get` calls, the last `get` specifies the "context key" while all previous ones together form the "context path". On one hand, this distinction is made for internal reasons, on the other hand because "keys" have both some restrictions concerning their value but also some potential as they may address multiple nodes at once. Thus, in
 
 `Gun.get(path_1).get(path_2).get(key)`
 
@@ -190,7 +190,7 @@ the final context's path is empty (`''`).
 
 When chaining `get` calls, GunDB concatenates the individually given arguments with a slash (`/`) in between to build the id of the final node. The outcome looks not unlike the path names used in file systems and gives the illusion(!) of a "containment tree". However, it is important to understand that there is no such tree: every node is independent of any other - and even nodes with an id like `a/b/c` linking to other nodes with ids of the form `a/b/c/d` (or similar) do not _contain_ the nodes they link to!
 
-In order to prevent unpleasant surprises, the argument of the final `get` call (i.e., the one defining a context key) should avoid slashes, while all others may very well contain them - unless there is only a single `get`. See the following example for illustration:
+In order to prevent unpleasant surprises, the argument of the final `get` call (i.e., the one defining the context key) should avoid slashes, while all others may very well contain them - unless there is only a single `get`. See the following example for illustration:
 
 ```
   const Context_1 = Gun.get('a').get('b').get('c')
@@ -208,7 +208,7 @@ In order to prevent unpleasant surprises, the argument of the final `get` call (
   console.log(Context_4._.link || Context_4._.soul) // displays "undefined"
 ```
 
-The first three variants of `get` finally address the same node (`waitFor` is explained [below](https://github.com/rozek/notes-on-gundb#waitfor))
+The first three variants of `get` finally address the same node, the last one doesn't (`waitFor` is explained [below](https://github.com/rozek/notes-on-gundb#waitfor))
 
 ### Paths of nested Objects ###
 
