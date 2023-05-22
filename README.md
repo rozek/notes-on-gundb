@@ -264,9 +264,29 @@ If a node exists, the object returned from `once` will contain a property `_` (w
 
 > Nota bene: if preferred, you may also extend GunDB with a method which returns the actual payload of a node given by its context, as shown [below](https://github.com/rozek/notes-on-gundb#contextdata)
 
-### Fetching multiple Nodes at once ###
+### Addressing multiple Nodes at once ###
 
-(t.b.w, see section on LEX in the wiki page about [RAD](https://github.com/amark/gun/wiki/RAD) and the [LEX rules](https://github.com/amark/gun/wiki/Strings,-Keys-and-Lex-Rules), Pagination)
+Until now, GunDB nodes have been addressed using `get` by specifying a literal path or subpath. Invoking `get` with such a string is the short variant of the general form
+
+`context.get({'#':path, '.':key_pattern})`
+
+where `path` is the base path of all nodes which shall be addressed and `key_pattern` specifies any constraints the remaining part of a node candidate's id (here called its "key") should meet in order for the node to be addressed. `key_pattern` is an object with the following properties:
+
+* `'='` specifies the exact key of a node
+* `'*'` specifies the first few characters of any node's key (called the "prefix")
+* `'>'` specifies the lexically lowest allowed node key (works )
+* `'<'` specifies the lexically highest allowed node key
+* `'%'` how many bytes may a peer load from storage before completing its response
+* `'-'` should the set of available ids be scanned upwards or downwards? 
+
+A few examples should help understanding these properties and their semantics:
+
+* `context.get({'#':path, '.':{ '=':key }})`<br>is just the long form of `context.get(path).get(key)`
+* (t.b.w)
+
+A [Wiki page](https://github.com/amark/gun/wiki/Strings,-Keys-and-Lex-Rules) describes how the comparison works in detail.
+
+(t.b.w, see section on LEX in the wiki page about [RAD](https://github.com/amark/gun/wiki/RAD) , Pagination)
 
 ### Following Links ###
 
