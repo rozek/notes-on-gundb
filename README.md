@@ -280,11 +280,11 @@ If a node exists, the object returned from `once` will contain a property `_` (w
 
 ### Addressing multiple Nodes at once ###
 
-Until now, GunDB nodes have been addressed using `get` by specifying a literal path or subpath. Invoking `get` with such a string is the short variant of the general form
+Until now, GunDB nodes have been addressed using `get` by specifying a literal path or key. Invoking `get` with such a string is the short variant of the general form
 
 `context.get({'#':path, '.':key_pattern})`
 
-where `path` is the base path of all nodes which shall be addressed and `key_pattern` specifies any constraints the remaining part of a node candidate's id (here called its "key") should meet in order for the node to be addressed. `key_pattern` is an object with the following properties:
+where `path` is the context path of all nodes which shall be addressed and `key_pattern` specifies any constraints the context key should meet in order for the node to be addressed. `key_pattern` is an object with the following properties:
 
 * `'='` specifies the exact key of a node
 * `'*'` specifies the first few characters of any node's key (called the "prefix")
