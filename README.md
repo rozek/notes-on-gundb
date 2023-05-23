@@ -453,11 +453,11 @@ These behaviours are independent of whether the target node exists or not.
 
 > **Nota bene**: if your application runs offline or (deliberately) without peer, the callback will never be invoked - which makes that feature effectively useless
 
-> **Conclusion: for professional application development it will be extremely important to implement an alternative which asserts that the new node contents have been persisted, at least. Ideally, there should even be a separation of persistence and synchronization ACKs**
+> **Conclusion: for professional application development it will be extremely important to implement an alternative which asserts that the new node contents have been persisted, at least. Ideally, there should even be a distinction between persistence and synchronization ACKs**
 
 ## Observing Nodes ##
 
-Since a graph database is, by design, _dynamic_, it is important for an application to observe any nodes it is interested in. GunDB provides three methods for that purpose:
+Since a graph database is _dynamic_ by design, it is important for an application to observe any nodes it is interested in. GunDB provides three methods for that purpose:
 
 * [on](https://github.com/amark/gun/wiki/API-(v0.3.x)#on),
 * [once](https://github.com/amark/gun/wiki/API#-gunoncecallback-option) and
