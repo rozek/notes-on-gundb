@@ -698,9 +698,9 @@ GunDB supports only very few data types out-of-the-box, all others will either h
 
 (t.b.w)
 
-### Text with Operational Transformation ###
+### Sharing Text with Operational Transformation ###
 
-GunDBs conflict resolution uses a "last-write-wins" strategy - which may work well with fine-granulated data structures, but may be really frustrating when multiple users try to work on the same text.
+GunDBs conflict resolution uses a "last-write-wins" strategy - which may work well with fine-granulated data structures, but may be really frustrating when multiple users try to work on the same text. Fortunately, there are already several other conflict resolution mechanisms - and one of them (called "Operational Transformation") has been especially developed for text sharing
 
 (t.b.w)
 
