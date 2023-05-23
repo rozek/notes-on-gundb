@@ -256,7 +256,7 @@ As mentioned above, nodes may be addressed using the [get](https://github.com/am
 * node ids starting with `~` or `~@` may have a special semantic which becomes relevent when trying to create or write a node with such an id
 * there does not seem to be an explicit limit for node ids (I tried 10k long ids which worked)
 
-> **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any stack traces**
+> **Conclusion: for professional application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any stack traces**
 
 ### Addressing multiple Nodes at once ###
 
@@ -383,7 +383,7 @@ The contents of the given argument are merged with the already existing contents
 * **dangerous**: an attempt to write a GunDB context into a node seems to effectively replace the addressed node with the one represented by that argument (which is prseumably not intended as the adressed node's metadata now no longer contains its own id but the one of the other node)
 * an attempt to write any other kind of non-plain Object into a node will log(!) an error message of the form "Invalid Data: x at y" and ignore that operation
 
-> **Conclusion: for professonal application development it will be extremely important to harden the API**
+> **Conclusion: for professional application development it will be extremely important to harden the API**
 
 #### Influence of Node Ids on Node Creation and Modification ####
 
@@ -395,7 +395,7 @@ Whether it is allowed to create or modify a node depends on its id:
 * an attempt to write to nodes with an id of the form `~@xxx` will also log(!) such an error _object_ unless the client has previously been authenticated using the alias following the `~@`
 * attempts to write to nodes with an id of the form `~xxx` will work fine unless the character sequence following the `~` looks like a public key and the client has not been authenticated using a key pair containing that public key: in such a case an error _object_ with the error message "Unverified data." is logged(!) (rather than throwing an exception)
 
-> **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any stack traces**
+> **Conclusion: for professional application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any stack traces**
 
 #### Allowed Property Names (in general) ####
 
@@ -406,7 +406,7 @@ Not all kinds of property names are permitted, some of them even break the GunDB
 * property names containing control characters (even `'\0'`) seem to work fine;
 * there seems to be no explicit limit on the length of parameter names (I tried 10k which worked)
 
-> **Conclusion: for professonal application development it will be extremely important to harden the API**
+> **Conclusion: for professional application development it will be extremely important to harden the API**
 
 #### Allowed Property Names (when writing nested Objects) ####
 
@@ -417,7 +417,7 @@ Since property names play a special role when used to write nested objects (and,
   * write all properties of the nested object into that node itself
 * property names of the form `~`, `~@`, `~@xxx` or `~xxx` will always write their links (as intended) but fail to create the target nodes unless the constraints described [above](https://github.com/rozek/notes-on-gundb#influence-of-node-ids-on-node-creation-and-modification) are met
 
-> **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any tracebacks**
+> **Conclusion: for professional application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any tracebacks**
 
 #### Allowed Property Values ####
 
@@ -445,11 +445,15 @@ An attempt to write any other kind of non-plain Object into a node property will
 
 These behaviours are independent of whether the target node exists or not.
 
-> **Conclusion: for professonal application development it will be extremely important to harden the API**
+> **Conclusion: for professional application development it will be extremely important to harden the API**
 
-### Waiting for Acknowledgements ###
+#### Waiting for Acknowledgements ####
 
-(t.b.w, put with callback, see [Wiki](https://github.com/amark/gun/wiki/API-(v0.3.x)))
+[put](https://github.com/amark/gun/wiki/API-(v0.3.x)#put) accepts a callback as its second argument. This callback is invoked whenever the given put request is acknowledged by a peer.
+
+> **Nota bene**: if you application runs offline or without peer, the callback will never be invoked - which makes that feature effectively useless
+
+> **Conclusion: for professional application development it will be extremely important to implement an alternative which asserts that the new node contents have been persisted, at least**
 
 ## Observing Nodes ##
 
@@ -459,7 +463,7 @@ These behaviours are independent of whether the target node exists or not.
 
 Apart from plain objects with properties of type `boolean`, `number`, `string` or "link", GunDB supports two more classes of data structures out-of-the-box:
 
-* (unordere) sets and
+* (unordered) sets and
 * time graphs
 
 Other data types will either have to mapped onto the built-in ones or implemented on top of GunDB (see below)
