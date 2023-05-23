@@ -145,6 +145,14 @@ The (perhaps) strange looking `async` [IIFE](https://developer.mozilla.org/en-US
 
 (t.b.w, see [Wiki](https://github.com/amark/gun/wiki/API-(v0.3.x)))
 
+### Changing GunDB Options at Runtime ###
+
+(t.b.w)
+
+### Managing GunDB Peers ###
+
+(t.b.w, initially and at runtime)
+
 ## Contexts ##
 
 GunDB's **fluent API** is based on the concept of contexts: many methods (such as `get`, `put`, `on` and others) return a **context** object which can then be used by the following method. Context objects are a bit like "handles" representing one (or multiple) database nodes - albeit with additional information that can be used to navigate back to the node that was addressed before.
