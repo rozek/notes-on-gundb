@@ -284,7 +284,7 @@ A [Wiki page](https://github.com/amark/gun/wiki/Strings,-Keys-and-Lex-Rules) des
 
 ### Reading Nodes ###
 
-`once` can be used to retrieve (a snapshot of) the contents of a given node - including its actual payload and some metadata.
+`once` can be used to retrieve (a snapshot of) the contents of a given node as a JavaScript object - including its actual payload and some metadata.
 
 ```
   async function ContentsOf (Context) {
@@ -304,6 +304,14 @@ A [Wiki page](https://github.com/amark/gun/wiki/Strings,-Keys-and-Lex-Rules) des
 ```
 
 If a node exists, the object returned from `once` will contain a property `_` (with the node's metadata) and all other properties the node holds at the moment (if any). If a node does not exist, the returned object will be empty.
+
+The "business properties" of a node may contain either
+
+* `null`,
+* a `boolean`, `number` or `string` primitive(!) or
+* an object of the form `{ '#':'an-absolute-node-id' }` (called a "link")
+
+No other property values are permitted.
 
 > Nota bene: if preferred, you may also extend GunDB with a method which returns the actual payload of a node given by its context, as shown [below](https://github.com/rozek/notes-on-gundb#contextdata)
 
