@@ -451,13 +451,42 @@ These behaviours are independent of whether the target node exists or not.
 
 [put](https://github.com/amark/gun/wiki/API-(v0.3.x)#put) accepts a callback as its second argument. This callback is invoked whenever the given put request is acknowledged by a peer.
 
-> **Nota bene**: if you application runs offline or without peer, the callback will never be invoked - which makes that feature effectively useless
+> **Nota bene**: if your application runs offline or (deliberately) without peer, the callback will never be invoked - which makes that feature effectively useless
 
-> **Conclusion: for professional application development it will be extremely important to implement an alternative which asserts that the new node contents have been persisted, at least**
+> **Conclusion: for professional application development it will be extremely important to implement an alternative which asserts that the new node contents have been persisted, at least. Ideally, there should even be a separation of persistence and synchronization ACKs**
 
 ## Observing Nodes ##
 
-(t.b.w, see [on](https://github.com/amark/gun/wiki/API-(v0.3.x)#on) and [map](https://github.com/amark/gun/wiki/API-(v0.3.x)#map))
+Since a graph database is, by design, _dynamic_, it is important for an application to observe any nodes it is interested in. GunDB provides three methods for that purpose:
+
+* [on](https://github.com/amark/gun/wiki/API-(v0.3.x)#on),
+* [once](https://github.com/amark/gun/wiki/API#-gunoncecallback-option) and
+* [map](https://github.com/amark/gun/wiki/API-(v0.3.x)#map)
+
+which even can be combined in various ways.
+
+### Fetching a node as a whole, once now ###
+
+(t.b.w)
+
+### Fetching a node as a whole, now and upon changes ###
+
+(t.b.w)
+
+### Iterating over the properties of a node ###
+
+(t.b.w)
+
+### Combining on, once and map ###
+
+(t.b.w)
+
+
+
+
+
+
+
 
 ## Built-in Data Structures ##
 
