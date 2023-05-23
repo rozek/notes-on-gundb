@@ -421,6 +421,13 @@ The contents of the given argument are merged with the already existing contents
 
 ## Built-in Data Structures ##
 
+Apart from plain objects with properties of type `boolean`, `number`, `string` or "link", GunDB supports two more classes of data structures out-of-the-box:
+
+* (unordere) sets and
+* time graphs
+
+Other data types will either have to mapped onto the built-in ones or implemented on top of GunDB (see below)
+
 ### Unordered Sets ###
 
 (t.b.w, see [Wiki](https://github.com/amark/gun/wiki/API-(v0.3.x)#set))
@@ -674,6 +681,28 @@ before they can actually decrypt the message itself. The [Wiki](https://github.c
 ### When a User's Credentials get compromised.. ###
 
 (t.b.w, change password, copy to new user space)
+
+## Implementing Data Types ##
+
+GunDB supports only very few data types out-of-the-box, all others will either have to be mapped onto the built-in ones or implemented on top of GunDB. The following sections provide a few examples
+
+### Tuples and Structures ###
+
+(t.b.w)
+
+### Flat Ordered Sets ###
+
+(t.b.w)
+
+### Hierarchical Ordered Sets ###
+
+(t.b.w)
+
+### Text with Operational Transformation ###
+
+GunDBs conflict resolution uses a "last-write-wins" strategy - which may work well with fine-granulated data structures, but may be really frustrating when multiple users try to work on the same text.
+
+(t.b.w)
 
 ## Persistence ##
 
