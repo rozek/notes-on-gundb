@@ -253,13 +253,34 @@ As mentioned above, nodes may be addressed using the [get](https://github.com/am
 * an attempt to address a node with an empty id (`''`) will log(!) the error message "0 length key!" (rather than throwing an exception)
 * node ids may contain control characters (even `\0`)
 * node ids may contain any number of slashes
-* node id `~` is permitted
-* node id `~@` will log(!) an error _object_ containing the error message "Alias not same!" (rather than throwing an exception)
-* node ids of the form `~@xxx` will also log(!) such an error _object_ unless the client has previously been authenticated using the alias following the `~@`
-* node ids of the form `~xxx` work fine unless the character sequence following the `~` looks like a public key and the client has not been authenticated using a key pair containing that public key: in such a case an error _object_ with the error message "Unverified data." is logged(!) (rather than throwing an exception)
+* node ids starting with `~` or `~@` may have a special semantic which becomes relevent when trying to create or write a node with such an id
 * there does not seem to be an explicit limit for node ids (I tried 10k long ids which worked)
 
 > **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any tracebacks**
+
+### Addressing multiple Nodes at once ###
+
+The previous section describes how GunDB nodes can be addressed using `get` with a literal path or key. However, invoking `get` with such a string is just the short variant of the general form
+
+`context.get({'#':path, '.':key_pattern})`
+
+where `path` is the context path of all nodes which shall be addressed and `key_pattern` specifies any constraints the context key should meet in order for the node to be addressed. `key_pattern` is an object with the following properties:
+
+* `'='` specifies the exact key of a node
+* `'*'` specifies the first few characters of any node's key (called the "prefix")
+* `'>'` specifies the lexically lowest allowed node key (warning: behaves like "≧")
+* `'<'` specifies the lexically highest allowed node key (warning: behaves like "≦")
+* `'%'` specifies how many bytes a peer may load from storage before completing its current response
+* `'-'` specifies whether the set of available ids should be scanned upwards or downwards?
+
+A few examples should help understanding these properties and their semantics:
+
+* `context.get({'#':path, '.':{ '=':key }})`<br>is just the long form of `context.get(path).get(key)`
+* (t.b.w, the author could not get it to work yet)
+
+A [Wiki page](https://github.com/amark/gun/wiki/Strings,-Keys-and-Lex-Rules) describes how the comparison works in detail.
+
+(t.b.w, see section on LEX in the wiki page about [RAD](https://github.com/amark/gun/wiki/RAD) , Pagination)
 
 ### Reading Nodes ###
 
@@ -286,30 +307,6 @@ If a node exists, the object returned from `once` will contain a property `_` (w
 
 > Nota bene: if preferred, you may also extend GunDB with a method which returns the actual payload of a node given by its context, as shown [below](https://github.com/rozek/notes-on-gundb#contextdata)
 
-### Addressing multiple Nodes at once ###
-
-Until now, GunDB nodes have been addressed using `get` by specifying a literal path or key. Invoking `get` with such a string is the short variant of the general form
-
-`context.get({'#':path, '.':key_pattern})`
-
-where `path` is the context path of all nodes which shall be addressed and `key_pattern` specifies any constraints the context key should meet in order for the node to be addressed. `key_pattern` is an object with the following properties:
-
-* `'='` specifies the exact key of a node
-* `'*'` specifies the first few characters of any node's key (called the "prefix")
-* `'>'` specifies the lexically lowest allowed node key (warning: behaves like "≧")
-* `'<'` specifies the lexically highest allowed node key (warning: behaves like "≦")
-* `'%'` specifies how many bytes a peer may load from storage before completing its current response
-* `'-'` specifies whether the set of available ids should be scanned upwards or downwards?
-
-A few examples should help understanding these properties and their semantics:
-
-* `context.get({'#':path, '.':{ '=':key }})`<br>is just the long form of `context.get(path).get(key)`
-* (t.b.w, the author could not get it to work yet)
-
-A [Wiki page](https://github.com/amark/gun/wiki/Strings,-Keys-and-Lex-Rules) describes how the comparison works in detail.
-
-(t.b.w, see section on LEX in the wiki page about [RAD](https://github.com/amark/gun/wiki/RAD) , Pagination)
-
 ### Following Links ###
 
 If a property of a given node looks like a link (i.e., it is an object with the single property `#` which contains a string), then the (always absolute) id of the link target may be extracted and used as an argument for `Gun.get()` in order to address the target node.
@@ -322,23 +319,15 @@ If a property of a given node looks like a link (i.e., it is an object with the 
 
 > nota bene: these lines use the author's GunDB extensions [Data](https://github.com/rozek/notes-on-gundb#contextdata) and [TargetOfLink](https://github.com/rozek/notes-on-gundb#guntargetoflink)
 
-### Working with Node Properties ###
+### Writing Nodes ###
 
-The properties of a node given by its context can be written with `put`, providing a plain JavaScript object containing a key-value pair with "key" being the name of the property and "value" the value to be written:
+(t.b.w)
 
-```
-  Gun.get('an/existing/node').put({ 'property-name':'value' })
-```
+* node id `~` is permitted
+* node id `~@` will log(!) an error _object_ containing the error message "Alias not same!" (rather than throwing an exception)
+* node ids of the form `~@xxx` will also log(!) such an error _object_ unless the client has previously been authenticated using the alias following the `~@`
+* node ids of the form `~xxx` work fine unless the character sequence following the `~` looks like a public key and the client has not been authenticated using a key pair containing that public key: in such a case an error _object_ with the error message "Unverified data." is logged(!) (rather than throwing an exception)
 
-Missing properties will be created, existing ones overwritten - regardless of their previous value. Other properties of the given node are left untouched. Allowed values are
-
-* `null`,
-* boolean, number or string primitives,
-* nested objects,
-* links or
-* node contexts (see below)
-
-By convention, writing `null` into a property marks it as "garbage" and creates a "tombstone" for it.
 
 If a given node does not yet exist, it will be created on-the-fly:
 
@@ -393,6 +382,24 @@ Since property names play a special role when used to write nested objects (and,
 * property names of the form `~`, `~@`, `~@xxx` or `~xxx` will always write their links (as intended) but fail to create the target nodes unless the constraints described [above](https://github.com/rozek/notes-on-gundb#addressing-nodes) are met
 
 > **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any tracebacks**
+
+### Writing individual Node Properties ###
+
+The properties of a node given by its context can be written with `put`, providing a plain JavaScript object containing a key-value pair with "key" being the name of the property and "value" the value to be written:
+
+```
+  Gun.get('an/existing/node').put({ 'property-name':'value' })
+```
+
+Missing properties will be created, existing ones overwritten - regardless of their previous value. Other properties of the given node are left untouched. Allowed values are
+
+* `null`,
+* boolean, number or string primitives,
+* nested objects,
+* links or
+* node contexts (see below)
+
+By convention, writing `null` into a property marks it as "garbage" and creates a "tombstone" for it.
 
 ### Patching Nodes ###
 
