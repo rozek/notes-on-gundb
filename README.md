@@ -341,22 +341,78 @@ If a given node does not yet exist, it will be created on-the-fly:
 
 #### Writing individual Node Properties ####
 
+Individual properties may be written by providing a plain JavaScript object containing a key-value pair with "key" being the name of the property and "value" the value to be written:
+
+```
+  Gun.get('an/existing/node').put({ 'property-name':'value' })
+```
+
+Missing properties will be created, existing ones overwritten - regardless of their previous value. Other properties of the given node are left untouched. Allowed values are
+
+* `null`,
+* boolean, number or string primitives,
+* nested objects,
+* links or
+* node contexts (see below)
+
+By convention, writing `null` into a property marks it as "garbage" and creates a "tombstone" for it.
+
 #### Patching Nodes ####
+
+Multiple properties of any kind may be written in a single operation.
+
+```
+  Gun.get('a/node').put({
+    'null':    null,
+    'boolean': true,
+    'number':  1.23,
+    'string':  'Hi',
+    'object':  { 'null':null, 'boolean':false, 'number':1.23, 'string':'Hi', 'object':{} },
+    'link':    Gun.get('other/node'),
+  })
+```
+
+The contents of the given argument are merged with the already existing contents of the addressed node: i.e., missing node properties will be created, existing ones overwritten and all other node properties left untouched.
+
+#### Allowed `put` Arguments (Node Values to be written) ####
+
+
+
 
 #### Influence of Node Ids on Node Creation and Modification ####
 
-Whether it is allowed to create or modify a node may depend on its id:
+Whether it is allowed to create or modify a node depends on its id:
 
-* writing to a node with the id `~` is generally permitted
+* nodes with ids that do not start with a tilde (`~`) may generally be created and modified
+* writing to a node with the id `~` is also generally permitted
 * an attempt to write a node with the id `~@` will log(!) an error _object_ containing the error message "Alias not same!" (rather than throwing an exception)
 * an attempt to write to nodes with an id of the form `~@xxx` will also log(!) such an error _object_ unless the client has previously been authenticated using the alias following the `~@`
 * attempts to write to nodes with an id of the form `~xxx` will work fine unless the character sequence following the `~` looks like a public key and the client has not been authenticated using a key pair containing that public key: in such a case an error _object_ with the error message "Unverified data." is logged(!) (rather than throwing an exception)
 
 #### Allowed Property Names (in general) ####
 
-#### Allowed Property Names (when writing Nested Objects) ####
+Not all kinds of parameter names are permitted, some of them even break the GunDB API:
+
+* **Dangerous**: an attempt to write a property with an empty name `''` either breaks the node or produces strange results ( e.g., `.put({ '':'Hi' })` will actually write `{ '0':'H', '1':'i' }`);
+* **Dangerous**: an attempt to write a property with the name `'_'` seems to break the node (as property `'_'` is already used by GunDB itself for a node's metadata);
+* property names containing control characters (even `'\0'`) seem to work fine;
+* there seems to be no explicit limit on the length of parameter names (I tried 10k which worked)
+
+> **Conclusion: for professonal application development it will be extremely important to harden the API**
+
+#### Allowed Property Names (when writing nested Objects) ####
+
+Since property names play a special role when used to write nested objects (and, thus, create new GunDB nodes) they have their own restrictions:
+
+* an attempt to write a nested object into a property with an empty name (`''`) will
+  * instead write a link to the node which is currently worked on and
+  * write all properties of the nested object into that node itself
+* property names of the form `~`, `~@`, `~@xxx` or `~xxx` will always write their links (as intended) but fail to create the target nodes unless the constraints described [above](https://github.com/rozek/notes-on-gundb#addressing-nodes) are met
+
+> **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any tracebacks**
 
 #### Allowed Property Values ####
+
 
 
 An attempt to assign a (nested) object to a property will create an additional node and write a link to that node into the property. The new node will have an id which consists of the original node's "soul", a slash (`/`) and the name of the property receiving the link:
@@ -385,62 +441,6 @@ This behaviour is independent of whether the target node exists or not.
 
 
 
-#### Allowed Property Names (in general) ####
-
-Not all kinds of parameter names are permitted, some of them even break the GunDB API:
-
-* **Dangerous**: an attempt to write a property with an empty name `''` either breaks the node or produces strange results ( e.g., `.put({ '':'Hi' })` will actually write `{ '0':'H', '1':'i' }`);
-* **Dangerous**: an attempt to write a property with the name `'_'` seems to break the node (as property `'_'` is already used by GunDB itself for a node's metadata);
-* property names containing control characters (even `'\0'`) seem to work fine;
-* there seems to be no explicit limit on the length of parameter names (I tried 10k which worked)
-
-> **Conclusion: for professonal application development it will be extremely important to harden the API**
-
-#### Allowed Property Names (when writing nested Objects) ####
-
-Since property names play a special role when used to write nested objects (and, thus, create new GunDB nodes) they have their own restrictions:
-
-* an attempt to write a nested object into a property with an empty name (`''`) will
-  * instead write a link to the node which is currently worked on and
-  * write all properties of the nested object into that node itself
-* property names of the form `~`, `~@`, `~@xxx` or `~xxx` will always write their links (as intended) but fail to create the target nodes unless the constraints described [above](https://github.com/rozek/notes-on-gundb#addressing-nodes) are met
-
-> **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any tracebacks**
-
-### Writing individual Node Properties ###
-
-The properties of a node given by its context can be written with `put`, providing a plain JavaScript object containing a key-value pair with "key" being the name of the property and "value" the value to be written:
-
-```
-  Gun.get('an/existing/node').put({ 'property-name':'value' })
-```
-
-Missing properties will be created, existing ones overwritten - regardless of their previous value. Other properties of the given node are left untouched. Allowed values are
-
-* `null`,
-* boolean, number or string primitives,
-* nested objects,
-* links or
-* node contexts (see below)
-
-By convention, writing `null` into a property marks it as "garbage" and creates a "tombstone" for it.
-
-### Patching Nodes ###
-
-Multiple properties of any kind may be written in a single operation.
-
-```
-  Gun.get('a/node').put({
-    'null':    null,
-    'boolean': true,
-    'number':  1.23,
-    'string':  'Hi',
-    'object':  { 'null':null, 'boolean':false, 'number':1.23, 'string':'Hi', 'object':{} },
-    'link':    Gun.get('other/node'),
-  })
-```
-
-The contents of the given argument are merged with the already existing contents of the addressed node: i.e., missing node properties will be created, existing ones overwritten and all other node properties left untouched.
 
 ### Waiting for Acknowledgements ###
 
