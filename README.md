@@ -467,28 +467,21 @@ which can even be combined in various ways.
 
 (t.b.w, `once` and `map` can be used in two ways: with callbacks or as part of a chain)
 
-### Fetching a node as a whole - once now ###
+### Fetching a Node as a whole - once now ###
 
 (t.b.w)
 
-### Fetching a node as a whole - now and upon changes ###
+### Fetching a Node as a whole - now and upon changes ###
 
 (t.b.w)
 
-### Iterating over the properties of a node ###
+### Iterating over the Properties of a Node ###
 
 (t.b.w)
 
 ### Combining on, once and map ###
 
 (t.b.w)
-
-
-
-
-
-
-
 
 ## Built-in Data Structures ##
 
