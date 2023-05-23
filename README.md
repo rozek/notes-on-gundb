@@ -490,7 +490,7 @@ which even can be combined in various ways.
 
 ## Built-in Data Structures ##
 
-Apart from plain objects with properties of type `boolean`, `number`, `string` or "link", GunDB supports two more classes of data structures out-of-the-box:
+Apart from plain objects with properties of type `boolean`, `number`, `string` or "links", GunDB supports two more classes of data structures out-of-the-box:
 
 * (unordered) sets and
 * time graphs
