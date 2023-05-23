@@ -465,11 +465,11 @@ Since a graph database is _dynamic_ by design, it is important for an applicatio
 
 which even can be combined in various ways.
 
-### Fetching a node as a whole, once now ###
+### Fetching a node as a whole - once now ###
 
 (t.b.w)
 
-### Fetching a node as a whole, now and upon changes ###
+### Fetching a node as a whole - now and upon changes ###
 
 (t.b.w)
 
