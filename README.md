@@ -256,7 +256,7 @@ As mentioned above, nodes may be addressed using the [get](https://github.com/am
 * node ids starting with `~` or `~@` may have a special semantic which becomes relevent when trying to create or write a node with such an id
 * there does not seem to be an explicit limit for node ids (I tried 10k long ids which worked)
 
-> **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any tracebacks**
+> **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any stack traces**
 
 ### Addressing multiple Nodes at once ###
 
@@ -376,8 +376,14 @@ The contents of the given argument are merged with the already existing contents
 
 #### Allowed `put` Arguments (Node Values to be written) ####
 
+`put` should generally be invoked with either `null` or a plain JavaScript object containing the node properties to be created or overwritten.
 
+* an attempt to write a `boolean` or a `number` primitive into a node will effectively nullify that node as well
+* an attempt to write a `string` primitive into a node will create an array-like node with the string's individual characters as its elements (which certainly isn't intended)
+* **dangerous**: an attempt to write a GunDB context into a node seems to effectively repalce the addressed node with the one represented by that argument (which is prseumably not intended as the adressed node's metadata now no longer contains its own id but the one of the other node)
+* an attempt to write any other kind of non-plain Object into a node will log(!) an error message of the form "Invalid Data: x at y" and ignore that operation
 
+> **Conclusion: for professonal application development it will be extremely important to harden the API**
 
 #### Influence of Node Ids on Node Creation and Modification ####
 
@@ -389,12 +395,14 @@ Whether it is allowed to create or modify a node depends on its id:
 * an attempt to write to nodes with an id of the form `~@xxx` will also log(!) such an error _object_ unless the client has previously been authenticated using the alias following the `~@`
 * attempts to write to nodes with an id of the form `~xxx` will work fine unless the character sequence following the `~` looks like a public key and the client has not been authenticated using a key pair containing that public key: in such a case an error _object_ with the error message "Unverified data." is logged(!) (rather than throwing an exception)
 
+> **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any stack traces**
+
 #### Allowed Property Names (in general) ####
 
-Not all kinds of parameter names are permitted, some of them even break the GunDB API:
+Not all kinds of property names are permitted, some of them even break the GunDB API:
 
-* **Dangerous**: an attempt to write a property with an empty name `''` either breaks the node or produces strange results ( e.g., `.put({ '':'Hi' })` will actually write `{ '0':'H', '1':'i' }`);
-* **Dangerous**: an attempt to write a property with the name `'_'` seems to break the node (as property `'_'` is already used by GunDB itself for a node's metadata);
+* **dangerous**: an attempt to write a property with an empty name `''` either breaks the node or produces strange results ( e.g., `.put({ '':'Hi' })` will actually write `{ '0':'H', '1':'i' }`);
+* **dangerous**: an attempt to write a property with the name `'_'` seems to break the node (as property `'_'` is already used by GunDB itself for a node's metadata);
 * property names containing control characters (even `'\0'`) seem to work fine;
 * there seems to be no explicit limit on the length of parameter names (I tried 10k which worked)
 
@@ -407,11 +415,14 @@ Since property names play a special role when used to write nested objects (and,
 * an attempt to write a nested object into a property with an empty name (`''`) will
   * instead write a link to the node which is currently worked on and
   * write all properties of the nested object into that node itself
-* property names of the form `~`, `~@`, `~@xxx` or `~xxx` will always write their links (as intended) but fail to create the target nodes unless the constraints described [above](https://github.com/rozek/notes-on-gundb#addressing-nodes) are met
+* property names of the form `~`, `~@`, `~@xxx` or `~xxx` will always write their links (as intended) but fail to create the target nodes unless the constraints described [above](https://github.com/rozek/notes-on-gundb#influence-of-node-ids-on-node-creation-and-modification) are met
 
 > **Conclusion: for professonal application development it will be extremely important to provide a wrapper around the original API which throws exceptions instead of logging useless messages which do not even contain any tracebacks**
 
 #### Allowed Property Values ####
+
+
+
 
 
 
