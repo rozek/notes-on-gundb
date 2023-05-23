@@ -321,13 +321,7 @@ If a property of a given node looks like a link (i.e., it is an object with the 
 
 ### Writing Nodes ###
 
-(t.b.w)
-
-* node id `~` is permitted
-* node id `~@` will log(!) an error _object_ containing the error message "Alias not same!" (rather than throwing an exception)
-* node ids of the form `~@xxx` will also log(!) such an error _object_ unless the client has previously been authenticated using the alias following the `~@`
-* node ids of the form `~xxx` work fine unless the character sequence following the `~` looks like a public key and the client has not been authenticated using a key pair containing that public key: in such a case an error _object_ with the error message "Unverified data." is logged(!) (rather than throwing an exception)
-
+As soon as a node has been addressed using `get`, it may be created or modified using `put`.
 
 If a given node does not yet exist, it will be created on-the-fly:
 
@@ -336,6 +330,18 @@ If a given node does not yet exist, it will be created on-the-fly:
   Gun.get('a/missing/node').put({ 'property-name':'value' })
 // the node will exist now
 ```
+
+Whether it is allowed to create or modify a node may depend on its id:
+
+* writing to a node with the id `~` is generally permitted
+* an attempt to write a node with the id `~@` will log(!) an error _object_ containing the error message "Alias not same!" (rather than throwing an exception)
+* an attempt to write to nodes with an id of the form `~@xxx` will also log(!) such an error _object_ unless the client has previously been authenticated using the alias following the `~@`
+* attempts to write to nodes with an id of the form `~xxx` will work fine unless the character sequence following the `~` looks like a public key and the client has not been authenticated using a key pair containing that public key: in such a case an error _object_ with the error message "Unverified data." is logged(!) (rather than throwing an exception)
+
+
+
+
+
 
 An attempt to assign a (nested) object to a property will create an additional node and write a link to that node into the property. The new node will have an id which consists of the original node's "soul", a slash (`/`) and the name of the property receiving the link:
 
@@ -348,7 +354,7 @@ An attempt to assign a (nested) object to a property will create an additional n
 
 An attempt to assign an object of the form `{ '#':'...' }` (i.e., a link) to a property will principally write the given link. However,
 
-* an attempt to write an empty link `{ '#':'' }` will instead write a link to a node with an id consisting of the id of the original node, a slash `/` and the name of the property written to (this _could_ be an undocumented feature, though)
+* an attempt to write an empty link `{ '#':'' }` will instead write a link to a node with an id consisting of the id of the original node, a slash `/` and the name of the property written to
 
 An attempt to write a GunDB context object into a node property will write a link to the addressed node instead:
 
@@ -360,6 +366,8 @@ An attempt to write a GunDB context object into a node property will write a lin
 This behaviour is independent of whether the target node exists or not.
 
 > **Conclusion: for professonal application development it will be extremely important to harden the API**
+
+
 
 #### Allowed Property Names (in general) ####
 
