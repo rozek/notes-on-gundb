@@ -781,6 +781,10 @@ GunDBs conflict resolution uses a "last-write-wins" strategy - which may work we
 
 (t.b.w, see [Wiki](https://github.com/amark/gun/wiki/gun-relay-manual-setting-up-(cert---ssl---container---oracle-cloud)))
 
+## GunDB and HATEOAS ##
+
+(t.b.w, having a highly distributed real database brings the [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) concept to a new level)
+
 ## Hooking into GunDB ##
 
 (t.b.w, also called "module" or "plugin" in the GunDB docs, see [Building Modules for Gun](https://github.com/amark/gun/wiki/Building-Modules-for-Gun), [Building Modules for Gun (v0.5.x)](https://github.com/amark/gun/wiki/Building-Modules-for-Gun-(v0.5.x)), [Building Storage Adapters](https://github.com/amark/gun/wiki/Building-Storage-Adapters))
