@@ -463,7 +463,9 @@ Since a graph database is _dynamic_ by design, it is important for an applicatio
 * [once](https://github.com/amark/gun/wiki/API#-gunoncecallback-option) and
 * [map](https://github.com/amark/gun/wiki/API-(v0.3.x)#map)
 
-which even can be combined in various ways.
+which can even be combined in various ways.
+
+(t.b.w, `once` and `map` can be used in two ways: with callbacks or as part of a chain)
 
 ### Fetching a node as a whole - once now ###
 
