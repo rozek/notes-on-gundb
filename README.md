@@ -304,7 +304,7 @@ where `path` is the context path of all nodes which shall be addressed and `key_
 A few examples should help understanding these properties and their semantics:
 
 * `context.get({'#':path, '.':{ '=':key }})`<br>is just the long form of `context.get(path).get(key)`
-* (t.b.w)
+* (t.b.w, the author could not get it to work yet)
 
 A [Wiki page](https://github.com/amark/gun/wiki/Strings,-Keys-and-Lex-Rules) describes how the comparison works in detail.
 
