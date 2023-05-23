@@ -380,7 +380,7 @@ The contents of the given argument are merged with the already existing contents
 
 * an attempt to write a `boolean` or a `number` primitive into a node will effectively nullify that node as well
 * an attempt to write a `string` primitive into a node will create an array-like node with the string's individual characters as its elements (which certainly isn't intended)
-* **dangerous**: an attempt to write a GunDB context into a node seems to effectively repalce the addressed node with the one represented by that argument (which is prseumably not intended as the adressed node's metadata now no longer contains its own id but the one of the other node)
+* **dangerous**: an attempt to write a GunDB context into a node seems to effectively replace the addressed node with the one represented by that argument (which is prseumably not intended as the adressed node's metadata now no longer contains its own id but the one of the other node)
 * an attempt to write any other kind of non-plain Object into a node will log(!) an error message of the form "Invalid Data: x at y" and ignore that operation
 
 > **Conclusion: for professonal application development it will be extremely important to harden the API**
@@ -421,11 +421,6 @@ Since property names play a special role when used to write nested objects (and,
 
 #### Allowed Property Values ####
 
-
-
-
-
-
 An attempt to assign a (nested) object to a property will create an additional node and write a link to that node into the property. The new node will have an id which consists of the original node's "soul", a slash (`/`) and the name of the property receiving the link:
 
 ```
@@ -446,12 +441,11 @@ An attempt to write a GunDB context object into a node property will write a lin
 // will write a link to 'other/node' into property 'link'
 ```
 
-This behaviour is independent of whether the target node exists or not.
+An attempt to write any other kind of non-plain Object into a node property will log(!) an error message of the form "Invalid data: x at y" and ignore that operation
+
+These behaviours are independent of whether the target node exists or not.
 
 > **Conclusion: for professonal application development it will be extremely important to harden the API**
-
-
-
 
 ### Waiting for Acknowledgements ###
 
