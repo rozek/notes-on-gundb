@@ -339,6 +339,12 @@ If a given node does not yet exist, it will be created on-the-fly:
 // the node will exist now
 ```
 
+#### Writing individual Node Properties ####
+
+#### Patching Nodes ####
+
+#### Influence of Node Ids on Node Creation and Modification ####
+
 Whether it is allowed to create or modify a node may depend on its id:
 
 * writing to a node with the id `~` is generally permitted
@@ -346,9 +352,11 @@ Whether it is allowed to create or modify a node may depend on its id:
 * an attempt to write to nodes with an id of the form `~@xxx` will also log(!) such an error _object_ unless the client has previously been authenticated using the alias following the `~@`
 * attempts to write to nodes with an id of the form `~xxx` will work fine unless the character sequence following the `~` looks like a public key and the client has not been authenticated using a key pair containing that public key: in such a case an error _object_ with the error message "Unverified data." is logged(!) (rather than throwing an exception)
 
+#### Allowed Property Names (in general) ####
 
+#### Allowed Property Names (when writing Nested Objects) ####
 
-
+#### Allowed Property Values ####
 
 
 An attempt to assign a (nested) object to a property will create an additional node and write a link to that node into the property. The new node will have an id which consists of the original node's "soul", a slash (`/`) and the name of the property receiving the link:
