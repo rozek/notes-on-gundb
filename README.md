@@ -118,6 +118,10 @@ A graph database contains nodes and links. Each node is individually addressable
 
 ## Preparational Steps ##
 
+GunDB may be used in a browser, under Node.js and within [NW.js](https://nwjs.io/) or [Electron.js](https://www.electronjs.org/)
+
+### Running GunDB in a Browser ###
+
 GunDB can be used directly in the browser without having to "build" (or "pack") an application before (this case is sometimes called a **no-build environment**). As a consequence, it is sufficient to simply add the following elements to the `<head>` section of a web page:
 
 ```
@@ -140,6 +144,18 @@ Now, add another `<script>` element (either to the `<head>` as well or to the `<
 ```
 
 The (perhaps) strange looking `async` [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) is not strictly necessary, but it allows you to use the [`await` operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) within your code in order to wait for completion of asynchronous GunDB methods.
+
+### Running GunDB under Node.js ###
+
+(t.b.w, require('gun') vs. require('gun/gun'))
+
+### Running GunDB under NW.js ###
+
+(t.b.w))
+
+### Running GunDB under Electron.js ###
+
+(t.b.w))
 
 ### Running GunDB with Options ###
 
