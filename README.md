@@ -147,7 +147,7 @@ The (perhaps) strange looking `async` [IIFE](https://developer.mozilla.org/en-US
 
 ### Running GunDB under Node.js ###
 
-(t.b.w, require('gun') vs. require('gun/gun'))
+(t.b.w, require('gun') vs. require('gun/gun'), automatic persistence with `file` option specifying a folder(!))
 
 ### Running GunDB under NW.js ###
 
