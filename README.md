@@ -1092,7 +1092,7 @@ creates a lot of nested nodes starting from a given base node (`Base` "inner" no
 Here is how the number of created nodes (aka `EntryCount`) can be calculated:
 
 ```
-  let EntryCount = 0, Base = 10
+  let EntryCount = 0, Base = 10, Depth = 3
   for (let i = 1; i <= Depth; i++) {
     EntryCount += Base ** i
   }
