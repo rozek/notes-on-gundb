@@ -10,6 +10,8 @@ a (growing) collection of notes on GunDB
 > **Important: after two weeks of intensive work and no substantial outcome, I have decided to give up on GunDB - it is full of bugs and - even worse - race conditions and the implementation looks like being hacked in a style used 40 years ago (when source code had to be compact and variable names short in order to fit into the memory)**
 > 
 > **I wish everbody working with and on GunDB good luck - but I will no longer participate**
+>
+> **Nevertheless, you may still use my contributions in any way you like - they are MIT licensed**
 
 While GunDB itself may be brilliant in many aspects, the docs are a complete nightmare (hard to read, chaotic, incomplete, contradictory, wrong). This repository therefore contains a collection of the author's notes on GunDB written (from the viewpoint of an application developer) while he tries to learn and use it.
 
