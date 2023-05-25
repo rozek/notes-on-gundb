@@ -13,7 +13,7 @@ a (growing) collection of notes on GunDB
 >
 > **Nevertheless, you may still use my contributions in any way you like - they are MIT licensed**
 
-While GunDB itself may be brilliant in many aspects, the docs are a complete nightmare (hard to read, chaotic, incomplete, contradictory, wrong). This repository therefore contains a collection of the author's notes on GunDB written (from the viewpoint of an application developer) while he tries to learn and use it.
+While the goals of GunDB may sound really promising, the docs are a complete nightmare (hard to read, chaotic, incomplete, contradictory, wrong). This repository therefore contains a collection of the author's notes on GunDB written (from the viewpoint of an application developer) while he tries to learn and use it.
 
 In the end, these notes will hopefully be more systematic than the official docs or the GunDB wiki.
 
