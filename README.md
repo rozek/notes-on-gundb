@@ -7,7 +7,7 @@ a (growing) collection of notes on GunDB
 
 [GunDB](https://github.com/amark/gun) is a decentralized (peer-to-peer) distributed [graph database](https://en.wikipedia.org/wiki/Graph_database) with support for multiple users, access control and persistence. It runs in the browser or on [Node.js](https://nodejs.org/en), works fine when offline and synchronizes with other peers using a "last-write-wins" strategy when online.
 
-> **Important: after two weeks of intensive work and no substantial outcome, I have decided to give up on GunDB - it is full of bugs and - even worse - race conditions and the implementation looks like being hacked in a style used 40 years ago (when source code had to be compact and variable names short in order to fit into the memory) **
+> **Important: after two weeks of intensive work and no substantial outcome, I have decided to give up on GunDB - it is full of bugs and - even worse - race conditions and the implementation looks like being hacked in a style used 40 years ago (when source code had to be compact and variable names short in order to fit into the memory)**
 
 While GunDB itself may be brilliant in many aspects, the docs are a complete nightmare (hard to read, chaotic, incomplete, contradictory, wrong). This repository therefore contains a collection of the author's notes on GunDB written (from the viewpoint of an application developer) while he tries to learn and use it.
 
