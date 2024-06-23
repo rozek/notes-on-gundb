@@ -17,7 +17,7 @@ While the goals and promised features of GunDB may sound really promising, the d
 
 ~~In the end, these notes will hopefully be more systematic than the official docs or the GunDB wiki.~~
 
-~~> feel free to [open an issue](https://github.com/rozek/notes-on-gundb/issues) if you find errors in my notes~~
+> ~~feel free to [open an issue](https://github.com/rozek/notes-on-gundb/issues) if you find errors in my notes~~
 
 ## Table of Contents ##
 
