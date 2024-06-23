@@ -15,9 +15,9 @@ a ~~(growing)~~ collection of notes on GunDB
 
 While the goals and promised features of GunDB may sound really promising, the docs are a complete nightmare (hard to read, chaotic, incomplete, contradictory, wrong). This repository therefore contains a collection of the author's notes on GunDB written (from the viewpoint of an application developer) while he tries to learn and use it.
 
-In the end, these notes will hopefully be more systematic than the official docs or the GunDB wiki.
+~~In the end, these notes will hopefully be more systematic than the official docs or the GunDB wiki.~~
 
-> feel free to [open an issue](https://github.com/rozek/notes-on-gundb/issues) if you find errors in my notes
+~~> feel free to [open an issue](https://github.com/rozek/notes-on-gundb/issues) if you find errors in my notes~~
 
 ## Table of Contents ##
 
