@@ -1,6 +1,6 @@
 # notes-on-gundb #
 
-a (growing) collection of notes on GunDB
+a ~~(growing)~~ collection of notes on GunDB
 
 ![Network of Pearls](img/network-of-pearls.png)
 <br><span style="font-size:10px">(image made with [DiffusionBee](https://github.com/divamgupta/diffusionbee-stable-diffusion-ui) and [Realistic Vision v2.0](https://civitai.com/models/4201/realistic-vision-v20))</span>
